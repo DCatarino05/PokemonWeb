@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - Pokédex</title>
   <link rel="stylesheet" href="login.css">
+  <script defer src="./js/login.js"></script>
 </head>
 <body class="login-body"> 
   <div class="login">
@@ -24,14 +25,7 @@
       </label>
       <button type="submit">Avançar</button>
     </form>
+    <img src="./images/pokedex.png" alt="pokedex" class="pokedex" style="display: none;"> <!-- Adicionei um estilo para ocultar a imagem por padrão -->
   </div>
-  <script>
-    document.getElementById("teamForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-      const selectedTeam = document.querySelector('input[name="team"]:checked').value;
-      localStorage.setItem('pokemonTeam', selectedTeam);
-      window.location.href = "index.html"; 
-    });
-  </script>
 </body>
 </html>
