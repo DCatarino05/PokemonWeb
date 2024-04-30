@@ -10,7 +10,7 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(to bottom, blue, yellow, red); /* Gradiente oblíquo do azul para o amarelo e depois para o vermelho */
+  background: linear-gradient(to bottom , blue, yellow, red);
   height: 100vh;
 }
 
@@ -31,7 +31,7 @@ html, body {
 
 .login h2 {
   margin-bottom: 20px;
-  color: black; /* Cor do texto */
+  color: black;
 }
 
 .login label {
@@ -41,15 +41,25 @@ html, body {
 
 .login button {
   padding: 10px 20px;
-  background-color :black; 
-  color: #ffffff; /* Cor do texto do botão */
+  color: #ffffff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
+.login button.red {
+  background-color: #FF5252; /* Vermelho */
+}
+
+.login button.blue {
+  background-color: #2196F3; /* Azul */
+}
+
+.login button.yellow {
+  background-color: #FFEB3B; /* Amarelo */
+}
+
 .login button:hover {
-  background-color: black;
-  color: black; /* Cor do botão ao passar o mouse */
+  opacity: 0.8; /* Opacidade reduzida ao passar o mouse */
 }

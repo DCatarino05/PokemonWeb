@@ -32,3 +32,25 @@ document.getElementById("teamForm").addEventListener("submit", function(event) {
       });
     });
   });
+
+  document.getElementById("teamForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    const selectedTeam = document.querySelector('input[name="team"]:checked').value;
+    localStorage.setItem('pokemonTeam', selectedTeam);
+    window.location.href = "pokedex.html"; 
+  });
+
+  // Adicionando evento change para alterar a cor do botão
+  document.querySelectorAll('input[name="team"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      var submitButton = document.getElementById('submitButton');
+      submitButton.classList.remove('red', 'blue', 'yellow');
+      if (this.value === 'red') {
+        submitButton.classList.add('red');
+      } else if (this.value === 'blue') {
+        submitButton.classList.add('blue');
+      } else if (this.value === 'yellow') {
+        submitButton.classList.add('yellow');
+      }
+    });
+  });
