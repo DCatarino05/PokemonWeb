@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Pokédex</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <div class="login">
+    <h2>Escolha sua equipe:</h2>
+    <form id="teamForm">
+      <label for="teamRed">
+        <input type="radio" id="teamRed" name="team" value="red">
+        Time Vermelho
+      </label>
+      <label for="teamBlue">
+        <input type="radio" id="teamBlue" name="team" value="blue">
+        Time Azul
+      </label>
+      <label for="teamYellow">
+        <input type="radio" id="teamYellow" name="team" value="yellow">
+        Time Amarelo
+      </label>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+  <script>
+    document.getElementById("teamForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const selectedTeam = document.querySelector('input[name="team"]:checked').value;
+      localStorage.setItem('pokemonTeam', selectedTeam);
+      window.location.href = "index.html"; 
+    });
+  </script>
+</body>
+</html>

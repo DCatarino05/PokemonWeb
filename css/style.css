@@ -1,3 +1,33 @@
+/*login css*/
+.login {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.login h2 {
+  margin-bottom: 20px;
+}
+
+.login label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.login button {
+  padding: 10px 20px;
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/*body css*/
+
+
 @import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;500;600;700;800&display=swap');
 
 * {
