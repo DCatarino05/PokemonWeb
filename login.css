@@ -48,3 +48,10 @@ html, body {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
+.pokedex {
+  display: none;
+  max-width: 200px; /* Define a largura máxima da imagem */
+  display: block; /* Para centralizar a imagem horizontalmente */
+  margin: 20px auto 0; /* Para centralizar a imagem horizontalmente e adicionar espaço superior */
+}
