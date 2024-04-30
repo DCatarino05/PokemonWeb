@@ -5,15 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pokédex</title>
   <link rel="stylesheet" href="./style.css">
-  <style>
-    li {
-      max-width: 200px; 
-      margin-left: 500px;
-      display: flex;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-  </style>
+
 </head>
 <body class="index-body">
   <div id="video-background">
@@ -45,12 +37,15 @@
       <button class="button btn-prev">Anterior &lt;</button>
       <button class="button btn-next">Próximo &gt;</button>
     </div>
-    <div class="pokemon-stats" style="display:none;">
-      <ul class="stats-list">
-        <!-- Aqui serão exibidas as estatísticas -->
-      </ul>
-    </div>
+    
     <img src="#" alt="pokedex" class="pokedex">
+    <img class="estatisticas" src="./images/estatisticas.png" alt="Estatisticas">
+
+    <div class="pokemon-stats-container" style="display:none;">
+      <div class="pokemon-stats">
+        <!-- Aqui serão exibidas as estatísticas -->
+      </div>
+    </div>
   </main>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -153,20 +148,41 @@
     });
 
     const displayPokemonStats = (stats) => {
-      if (stats.length > 0) {
-        statsList.innerHTML = ''; // Limpa a lista antes de adicionar as novas estatísticas
+  const pokemonStatsContainer = document.querySelector('.pokemon-stats-container');
+  const statsList = document.querySelector('.pokemon-stats');
 
-        stats.forEach(stat => {
-          const listItem = document.createElement('li');
-          listItem.textContent = stat;
-          statsList.appendChild(listItem);
-        });
+  if (stats.length > 0) {
+    statsList.innerHTML = ''; // Limpa a lista antes de adicionar as novas estatísticas
 
-        pokemonStatsContainer.style.display = 'block';
-      } else {
-        pokemonStatsContainer.style.display = 'none';
-      }
-    }
+    stats.forEach(stat => {
+      const statElement = document.createElement('h2');
+      statElement.textContent = stat;
+      statsList.appendChild(statElement);
+    });
+
+    pokemonStatsContainer.style.display = 'flex';
+  } else {
+    pokemonStatsContainer.style.display = '';
+  }
+
+  buttonNext.addEventListener('click', () => {
+  searchPokemon += 1;
+  // Oculta o contêiner de estatísticas ao avançar para o próximo Pokémon
+  pokemonStatsContainer.style.display = 'none';
+  renderPokemon(searchPokemon);
+});
+
+buttonPrev.addEventListener('click', () => {
+  if (searchPokemon > 1) {
+    searchPokemon -= 1;
+    // Oculta o contêiner de estatísticas ao retroceder para o Pokémon anterior
+    pokemonStatsContainer.style.display = 'none';
+    renderPokemon(searchPokemon);
+  }
+});
+
+}
+
   </script>
 </body>
 </html>
