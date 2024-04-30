@@ -4,6 +4,8 @@
     background-color: aliceblue;
     background-size: cover;
     min-height: 100vh;
+    background: url("images/fundo.jpg") no-repeat center;
+  background-size: cover;
   }
   .login {
     position: absolute;
