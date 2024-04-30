@@ -1,4 +1,10 @@
 /*login css*/
+.login-body {
+  text-align: center;
+  background-color: aliceblue;
+  background-size: cover;
+  min-height: 100vh;
+}
 .login {
   position: absolute;
   top: 50%;
@@ -37,11 +43,10 @@
   font-family: 'Oxanium', cursive;
 }
 
-body {
+.index-body {
   text-align: center;
   background: url("images/fundo.jpg") no-repeat center;
   background-size: cover;
-  
   min-height: 100vh;
 }
 

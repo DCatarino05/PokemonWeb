@@ -39,6 +39,23 @@ const renderPokemon = async (pokemon) => {
   }
 }
 
+const renderPokedex = (team) => {
+  const pokedexImage = document.querySelector('.pokedex');
+  switch (team) {
+    case 'red':
+      pokedexImage.src = "./images/pokedex.png";
+      break;
+    case 'blue':
+      pokedexImage.src = "./images/pokedex_blue.png";
+      break;
+    case 'yellow':
+      pokedexImage.src = "./images/pokedex_yellow.png";
+      break;
+    default:
+      pokedexImage.src = "./images/pokedex.png";
+  }
+};
+
 form.addEventListener('submit', (event) => {
   event.preventDefault();
   renderPokemon(input.value.toLowerCase());
@@ -57,33 +74,3 @@ buttonNext.addEventListener('click', () => {
 });
 
 renderPokemon(searchPokemon);
-
-
-
-
-const teamForm = document.getElementById('teamForm');
-
-teamForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  const selectedTeam = document.querySelector('input[name="team"]:checked').value;
-  localStorage.setItem('pokemonTeam', selectedTeam);
-  renderPokedex(selectedTeam);
-});
-const renderPokedex = (team) => {
-  const pokedexImage = document.querySelector('.pokedex');
-  switch (team) {
-    case 'red':
-      pokedexImage.src = "./images/pokedex.png";
-      break;
-    case 'blue':
-      pokedexImage.src = "./images/pokedex_blue.png";
-      break;
-    case 'yellow':
-      pokedexImage.src = "./images/pokedex_yellow.png";
-      break;
-    default:
-      pokedexImage.src = "./images/pokedex.png";
-  }
-};
-
-
