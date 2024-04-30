@@ -11,7 +11,7 @@ document.getElementById("teamForm").addEventListener("submit", function(event) {
     const teamRed = document.getElementById('teamRed');
     const teamBlue = document.getElementById('teamBlue');
     const teamYellow = document.getElementById('teamYellow');
-    
+
     document.querySelectorAll('input[name="team"]').forEach((radio) => {
       radio.addEventListener('change', () => {
         if (radio.checked) {

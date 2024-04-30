@@ -18,7 +18,7 @@
       </label>
       <label for="teamBlue">
         <input type="radio" id="teamBlue" name="team" value="blue">
-        Equipa Mística
+        Equipa Mystic
       </label>
       <label for="teamYellow">
         <input type="radio" id="teamYellow" name="team" value="yellow">
@@ -28,4 +28,12 @@
     </form>
   </div>
 </body>
+<script>
+  document.getElementById("teamForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    const selectedTeam = document.querySelector('input[name="team"]:checked').value;
+    localStorage.setItem('pokemonTeam', selectedTeam);
+    window.location.href = "pokedex.html"; 
+  });
+</script>
 </html>
