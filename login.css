@@ -41,25 +41,10 @@ html, body {
 
 .login button {
   padding: 10px 20px;
-  color: #ffffff;
+  color: white;
+  background-color: black;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-}
-
-.login button.red {
-  background-color: #FF5252; /* Vermelho */
-}
-
-.login button.blue {
-  background-color: #2196F3; /* Azul */
-}
-
-.login button.yellow {
-  background-color: #FFEB3B; /* Amarelo */
-}
-
-.login button:hover {
-  opacity: 0.8; /* Opacidade reduzida ao passar o mouse */
 }
