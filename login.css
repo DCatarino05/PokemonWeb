@@ -22,12 +22,9 @@ html, body {
   padding: 40px;
   border-radius: 10px;
   box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.3);
-  transition: transform 0.3s ease;
 }
 
-.login:hover {
-  transform: scale(1.05);
-}
+
 
 .login h2 {
   margin-bottom: 20px;
@@ -54,4 +51,30 @@ html, body {
   max-width: 200px; 
   display: block; 
   margin: 20px auto 0; 
+}
+
+.team-selection {
+  max-width: 500px; /* Define a largura máxima do contêiner */
+  margin: 0 auto; /* Centraliza o contêiner horizontalmente */
+  text-align: center; /* Centraliza as imagens horizontalmente */
+}
+
+.team-image {
+  width: 150px; /* Define a largura das imagens das equipes */
+  cursor: pointer; /* Altera o cursor para indicar que as imagens são clicáveis */
+  display: inline-block; /* Para manter as imagens lado a lado */
+  margin: 10px; /* Adiciona um espaçamento entre as imagens */
+}
+
+.team-image:hover {
+  animation: pulse 0.5s infinite alternate; /* Adiciona uma animação de pulso quando o mouse está sobre a imagem */
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
 }
