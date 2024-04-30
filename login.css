@@ -71,6 +71,12 @@ html, body {
   animation: pulse 0.5s infinite alternate; /* Adiciona uma animação de pulso quando o mouse está sobre a imagem */
 }
 
+.escolhereq {
+  max-width: 100%; /* Define a largura máxima como 100% da largura do contêiner pai */
+  height: auto; /* Mantém a proporção da imagem */
+}
+
+
 @keyframes pulse {
   from {
     transform: scale(1);
