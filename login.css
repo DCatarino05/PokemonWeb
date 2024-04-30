@@ -51,7 +51,7 @@ html, body {
 
 .pokedex {
   display: none;
-  max-width: 200px; /* Define a largura máxima da imagem */
-  display: block; /* Para centralizar a imagem horizontalmente */
-  margin: 20px auto 0; /* Para centralizar a imagem horizontalmente e adicionar espaço superior */
+  max-width: 200px; 
+  display: block; 
+  margin: 20px auto 0; 
 }

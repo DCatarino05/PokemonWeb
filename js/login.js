@@ -5,7 +5,6 @@ document.getElementById("teamForm").addEventListener("submit", function(event) {
     window.location.href = "pokedex.html"; 
   });
 
-  // Certifique-se de que o código JavaScript seja executado após o carregamento completo do DOM
   document.addEventListener("DOMContentLoaded", function() {
     const pokedexImage = document.querySelector('.pokedex');
     const teamRed = document.getElementById('teamRed');
@@ -34,14 +33,11 @@ document.getElementById("teamForm").addEventListener("submit", function(event) {
   });
 
   document.addEventListener("DOMContentLoaded", function() {
-    // Selecione a imagem da Pokédex
     const pokedexImage = document.querySelector('.pokedex');
   
-    // Adicione um evento de mudança para cada botão de rádio
     document.querySelectorAll('input[name="team"]').forEach((radio) => {
       radio.addEventListener('change', () => {
         if (radio.checked) {
-          // Atualiza a imagem da Pokédex de acordo com a equipe selecionada
           switch (radio.value) {
             case 'red':
               pokedexImage.src = "./images/timevalor.png";
@@ -56,13 +52,11 @@ document.getElementById("teamForm").addEventListener("submit", function(event) {
               pokedexImage.src = "./images/pokedex.png";
           }
   
-          // Exibe a imagem da Pokédex quando uma equipe for selecionada
           pokedexImage.style.display = "block";
         }
       });
     });
   
-    // Adicione um evento de envio para o formulário
     document.getElementById("teamForm").addEventListener("submit", function(event) {
       event.preventDefault();
       const selectedTeam = document.querySelector('input[name="team"]:checked').value;

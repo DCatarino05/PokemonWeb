@@ -27,12 +27,10 @@
     <img class="pokedex" src="./images/pokedex.png" alt="Pokédex" style="display: none;">
   </div>
   <script>
-    // Adicione um evento de mudança para cada botão de rádio
     document.querySelectorAll('input[name="team"]').forEach((radio) => {
       radio.addEventListener('change', () => {
         const pokedexImage = document.querySelector('.pokedex');
         if (radio.checked) {
-          // Atualize a imagem da Pokédex de acordo com a equipe selecionada
           switch (radio.value) {
             case 'red':
               pokedexImage.src = "./images/timevalor.png";
@@ -46,7 +44,6 @@
             default:
               pokedexImage.src = "./images/pokedex.png";
           }
-          // Exibe a imagem da Pokédex quando uma equipe for selecionada
           pokedexImage.style.display = "block";
         }
       });
