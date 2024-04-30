@@ -97,7 +97,7 @@ main {
   width: 65%;
   transform: translate(-57%, 0);
   display: flex;
-  gap: 20px;
+  gap: 10px;
 }
 
 .button {

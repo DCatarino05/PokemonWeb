@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pokédex</title>
   <link rel="stylesheet" href="./style.css">
+  <style>
+    li {
+      max-width: 200px; 
+      margin-left: 500px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
 <body class="index-body">
   <div id="video-background">
@@ -16,11 +25,13 @@
 
   <main>
     <!-- Seu conteúdo aqui -->
-    <img src="#" alt="pokemon" class="pokemon__image">
-    <h1 class="pokemon__data">
-      <span class="pokemon__number"></span> -
-      <span class="pokemon__name"></span>
-    </h1>
+    <div class="pokemon-info">
+      <img src="#" alt="pokemon" class="pokemon__image">
+      <h1 class="pokemon__data">
+        <span class="pokemon__number"></span> -
+        <span class="pokemon__name"></span>
+      </h1>
+    </div>
     <form class="form">
       <input
         type="search"
@@ -30,8 +41,14 @@
       />
     </form>
     <div class="buttons">
+      <button class="button btn-stats">Estatísticas</button> 
       <button class="button btn-prev">Anterior &lt;</button>
       <button class="button btn-next">Próximo &gt;</button>
+    </div>
+    <div class="pokemon-stats" style="display:none;">
+      <ul class="stats-list">
+        <!-- Aqui serão exibidas as estatísticas -->
+      </ul>
     </div>
     <img src="#" alt="pokedex" class="pokedex">
   </main>
@@ -39,6 +56,7 @@
     document.addEventListener("DOMContentLoaded", function() {
       const pokedexImage = document.querySelector('.pokedex');
       const pokemonTeam = localStorage.getItem('pokemonTeam');
+      let searchPokemon = 1;
 
       if (pokemonTeam) {
         switch (pokemonTeam) {
@@ -64,13 +82,13 @@
     const pokemonName = document.querySelector('.pokemon__name');
     const pokemonNumber = document.querySelector('.pokemon__number');
     const pokemonImage = document.querySelector('.pokemon__image');
-
     const form = document.querySelector('.form');
     const input = document.querySelector('.input__search');
     const buttonPrev = document.querySelector('.btn-prev');
     const buttonNext = document.querySelector('.btn-next');
-
-    let searchPokemon = 1;
+    const buttonStats = document.querySelector('.btn-stats');
+    const pokemonStatsContainer = document.querySelector('.pokemon-stats');
+    const statsList = document.querySelector('.stats-list');
 
     const fetchPokemon = async (pokemon) => {
       const APIResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
@@ -81,8 +99,18 @@
       }
     }
 
-    const renderPokemon = async (pokemon) => {
+    const fetchPokemonStats = async (pokemon) => {
+      const data = await fetchPokemon(pokemon);
 
+      if (data) {
+        return data.stats.map(stat => `${stat.stat.name}: ${stat.base_stat}`);
+      } else {
+        console.error('Erro ao buscar estatísticas do Pokémon');
+        return [];
+      }
+    }
+
+    const renderPokemon = async (pokemon) => {
       pokemonName.innerHTML = 'Loading...';
       pokemonNumber.innerHTML = '';
 
@@ -92,7 +120,7 @@
         pokemonImage.style.display = 'block';
         pokemonName.innerHTML = data.name;
         pokemonNumber.innerHTML = data.id;
-        pokemonImage.src = data['sprites']['versions']['generation-v']['black-white']['animated']['front_default'];
+        pokemonImage.src = data.sprites.versions['generation-v']['black-white'].animated.front_default;
         input.value = '';
         searchPokemon = data.id;
       } else {
@@ -119,15 +147,26 @@
       renderPokemon(searchPokemon);
     });
 
-    // Adicione um evento de clique para as imagens das equipes para definir a equipe selecionada e mostrar a imagem da Pokédex
-    document.querySelectorAll('.team-image').forEach((image) => {
-      image.addEventListener('click', (event) => {
-        const selectedTeam = event.target.alt.split(' ')[1].toLowerCase();
-        localStorage.setItem('pokemonTeam', selectedTeam); // Definindo a equipe selecionada no armazenamento local
-        // Redirecionando para a página da Pokédex
-        window.location.href = "pokedex.html";
-      });
+    buttonStats.addEventListener('click', async () => {
+      const stats = await fetchPokemonStats(searchPokemon);
+      displayPokemonStats(stats);
     });
+
+    const displayPokemonStats = (stats) => {
+      if (stats.length > 0) {
+        statsList.innerHTML = ''; // Limpa a lista antes de adicionar as novas estatísticas
+
+        stats.forEach(stat => {
+          const listItem = document.createElement('li');
+          listItem.textContent = stat;
+          statsList.appendChild(listItem);
+        });
+
+        pokemonStatsContainer.style.display = 'block';
+      } else {
+        pokemonStatsContainer.style.display = 'none';
+      }
+    }
   </script>
 </body>
 </html>
