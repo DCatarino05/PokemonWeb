@@ -39,7 +39,7 @@
             border-radius: 4px;
             padding: 8px 16px;
             text-align: center;
-            text-decoration: none;
+            text-decoration: none;  
             font-size: 16px;
             margin-right: 5px;
             display: none; /* Inicialmente escondido */
@@ -62,6 +62,7 @@
 <body>
     <h1>Meus Pokémon</h1>
     <div class="container" id="pokemon-container"></div>
+    
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
     <script>
         const pokemonContainer = document.getElementById('pokemon-container');
@@ -113,16 +114,36 @@
         };
 
         const confirmDeletePokemon = (pokemonId, pokemonName) => {
-            const confirmation = confirm(`Tem a certeza que quer eliminar o Pokémon ${pokemonName}?`);
-            if (confirmation) {
-                deletePokemon(pokemonId);
-            }
-        };
+    const confirmationMessage = `
+        <div class="confirmation-message">
+            <p>Tem certeza que deseja excluir o Pokémon ${pokemonName}?</p>
+            <div class="confirmation-buttons">
+                <button class="confirmation-button confirm" onclick="deletePokemon(${pokemonId})">Confirmar</button>
+                <button class="confirmation-button cancel" onclick="cancelDelete()">Cancelar</button>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', confirmationMessage);
+};
+
 
         const deletePokemon = (pokemonId) => {
+            removeConfirmationMessage(); // Remover a mensagem de confirmação
             myPokemon = myPokemon.filter(p => p.id !== pokemonId);
             displayMyPokemon();
         };
+
+        const cancelDelete = () => {
+            removeConfirmationMessage(); // Remover a mensagem de confirmação
+        };
+
+        const removeConfirmationMessage = () => {
+    const confirmationMessage = document.querySelector('.confirmation-message');
+    if (confirmationMessage) {
+        confirmationMessage.remove();
+    }
+};
+
 
         fetchMyPokemon();
     </script>

@@ -16,6 +16,82 @@ h1 {
     font-size: 54px;
 }
 
+.confirmation-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    z-index: 1001; /* Garante que a mensagem esteja acima de outros elementos */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Adiciona sombra à mensagem */
+}
+
+.confirmation-message p {
+    margin: 0 0 10px; /* Margem inferior para separar os parágrafos */
+}
+
+.confirmation-buttons {
+    text-align: center;
+}
+
+.confirmation-button {
+    cursor: pointer;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 0 10px;
+}
+
+.confirmation-button.confirm {
+    background-color: #4CAF50; /* Verde para o botão de confirmação */
+}
+
+.confirmation-button.cancel {
+    background-color: #f44336; /* Vermelho para o botão de cancelamento */
+}
+.confirmation-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    z-index: 1001; /* Garante que a mensagem esteja acima de outros elementos */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Adiciona sombra à mensagem */
+}
+
+.confirmation-message p {
+    margin: 0 0 10px; /* Margem inferior para separar os parágrafos */
+}
+
+.confirmation-buttons {
+    text-align: center;
+}
+
+.confirmation-button {
+    cursor: pointer;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 0 10px;
+}
+
+.confirmation-button.confirm {
+    background-color: #4CAF50; /* Verde para o botão de confirmação */
+}
+
+.confirmation-button.cancel {
+    background-color: #f44336; /* Vermelho para o botão de cancelamento */
+}
+
+
 
 
 .pokemon-card {
