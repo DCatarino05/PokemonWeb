@@ -1,5 +1,5 @@
 body {
-    background-color: orangered;
+    background-color: #C6B5EA;
     color: white;
     margin: 0;
     font-family: rubik;
@@ -16,6 +16,57 @@ h1 {
     font-size: 54px;
 }
 
+.pokemon-image {
+    filter: grayscale(100%);
+}
+
+.pokemon-card {
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #BBB2EB;
+    opacity: 0.5;
+}
+
+.pokemon-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #BBB2EB;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+.edit-button,
+.delete-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+}
+
+.delete-button {
+    background-color: #f44336;
+}
+
 #pokedex {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -26,8 +77,8 @@ h1 {
 .card {
     list-style: none;
     padding: 40px;
-    background-color: #f4f4f4;
-    color: #222;
+    background-color: transparent;
+    color: white;
   text-align: center;
 }
 
@@ -43,7 +94,7 @@ h1 {
 }
 .card-subtitle {
     margin-top: 5px;
-    color: #666;
+    color: white;
     font-weight: lighter;
 }
 
