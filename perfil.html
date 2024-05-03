@@ -6,10 +6,63 @@
     <title>Pokedex</title>
     <link rel="stylesheet" href="perfil.css" />
     <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet" />
+    <style>
+        .pokemon-image {
+            filter: grayscale(100%);
+        }
+
+        .pokemon-card {
+            position: relative;
+            display: inline-block; /* Garante que os botões fiquem dentro do cartão */
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #BBB2EB;
+            opacity: 0.5;
+        }
+
+        .pokemon-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #BBB2EB;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .edit-button,
+        .delete-button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            cursor: pointer;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+        }
+
+        .delete-button {
+            background-color: #f44336;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Pokedex</h1>
+        <h1>A tua Pokedex</h1>
         <ul id="pokedex"></ul>
     </div>
     <script src="/js/perfil.js"></script>
@@ -36,42 +89,37 @@
 
         const displayPokemon = (pokemon) => {
             const pokemonHTMLString = pokemon.map((pokeman) => `
-                <li class="card" onclick="fetchAndDisplayStats(${pokeman.id})" data-pokemon-id="${pokeman.id}">
-                    <img class="card-image" src="${pokeman.image}"/>
-                    <h2 class="card-title">${pokeman.id}. ${pokeman.name}</h2>
-                    <p class="card-subtitle">Type: ${pokeman.type}</p>
+                <li class="card pokemon-card" data-pokemon-id="${pokeman.id}">
+                    <div class="overlay"></div>
+                    <img class="card-image pokemon-image" src="${pokeman.image}"/>
+                    <div class="pokemon-info">
+                        <h2 class="card-title">${pokeman.id}. ${pokeman.name}</h2>
+                        <p class="card-subtitle">Type: ${pokeman.type}</p>
+                        <button class="edit-button" onclick="editPokemon(${pokeman.id})">Editar</button>
+                        <button class="delete-button" onclick="deletePokemon(${pokeman.id})">Eliminar</button>
+                    </div>
                     <div class="stats-container" style="display:none;"></div>
                 </li>
             `).join('');
             pokedex.innerHTML = pokemonHTMLString;
         };
 
-        const fetchAndDisplayStats = async (pokemonId) => {
-            const card = document.querySelector(`.card[data-pokemon-id="${pokemonId}"]`);
-            if (!card) {
-                console.error(`Card with pokemon ID ${pokemonId} not found.`);
-                return;
-            }
+        const editPokemon = (pokemonId) => {
+            alert(`Editar Pokémon com ID ${pokemonId}`);
+            // Aqui você pode adicionar a lógica para editar o Pokémon com o ID fornecido
+        };
 
-            const statsContainer = card.querySelector('.stats-container');
-            if (!statsContainer) {
-                console.error(`Stats container not found for pokemon ID ${pokemonId}.`);
-                return;
-            }
-
-            if (statsContainer.innerHTML.trim() === '') {
-                const url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
-                const response = await fetch(url);
-                const data = await response.json();
-                const stats = data.stats.map((stat) => ({
-                    name: stat.stat.name,
-                    value: stat.base_stat,
-                }));
-                const statsHTML = stats.map((stat) => `<p>${stat.name}: ${stat.value}</p>`).join('');
-                statsContainer.innerHTML = statsHTML;
-                statsContainer.style.display = 'block';
-            } else {
-                statsContainer.style.display = statsContainer.style.display === 'none' ? 'block' : 'none';
+        const deletePokemon = (pokemonId) => {
+            const confirmation = confirm(`Tem a certeza que quer eliminar o Pokémon com ID ${pokemonId}?`);
+            if (confirmation) {
+                const card = document.querySelector(`.card[data-pokemon-id="${pokemonId}"]`);
+                if (card) {
+                    card.remove();
+                    alert(`Pokémon com ID ${pokemonId} eliminado com sucesso.`);
+                    // Aqui você pode adicionar a lógica para realmente excluir o Pokémon do seu sistema
+                } else {
+                    alert(`Pokémon com ID ${pokemonId} não encontrado.`);
+                }
             }
         };
 
