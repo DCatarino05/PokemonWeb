@@ -18,8 +18,10 @@
             flex-basis: 200px;
             margin: 10px;
             padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
             text-align: center;
-            background-color: transparent; /* Adicionado fundo branco */
+            background-color: #f0f0f0; /* Cor de fundo */
             cursor: pointer; /* Adicionado para indicar que os Pokémon são clicáveis */
         }
 
@@ -82,24 +84,24 @@
 
         const displayMyPokemon = () => {
             pokemonContainer.innerHTML = myPokemon.map(pokemon => `
-            <div class="pokemon-item" data-pokemon-id="${pokemon.id}" onclick="selectPokemon(${pokemon.id})">
+                <div class="pokemon-item" data-pokemon-id="${pokemon.id}" onclick="selectPokemon(${pokemon.id})">
+                    <!-- Adicionado o evento onclick e o atributo data-pokemon-id -->
                     <img class="pokemon-image" src="${pokemon.image}" alt="${pokemon.name}" />
                     <h3>${pokemon.name}</h3>
                     <button class="edit-button" onclick="editPokemon(${pokemon.id})">Editar</button>
-                    <button class="delete-button" onclick="deletePokemon(${pokemon.id})">Eliminar</button>
+                    <button class="delete-button" onclick="confirmDeletePokemon(${pokemon.id}, '${pokemon.name}')">Eliminar</button>
                 </div>
             `).join('');
         };
 
         const selectPokemon = (pokemonId) => {
-                // Exibe os botões de edição e exclusão para o Pokémon selecionado
-                const pokemonItem = document.querySelector(`.pokemon-item[data-pokemon-id="${pokemonId}"]`);
-                const editButton = pokemonItem.querySelector('.edit-button');
-                const deleteButton = pokemonItem.querySelector('.delete-button');
-                editButton.style.display = 'inline-block';
-                deleteButton.style.display = 'inline-block';
-        };
-
+    // Exibe os botões de edição e exclusão para o Pokémon selecionado
+    const pokemonItem = document.querySelector(`.pokemon-item[data-pokemon-id="${pokemonId}"]`);
+    const editButton = pokemonItem.querySelector('.edit-button');
+    const deleteButton = pokemonItem.querySelector('.delete-button');
+    editButton.style.display = 'inline-block';
+    deleteButton.style.display = 'inline-block';
+};
 
         const editPokemon = (pokemonId) => {
             const pokemon = myPokemon.find(p => p.id === pokemonId);
@@ -110,19 +112,19 @@
             }
         };
 
-        const deletePokemon = (pokemonId) => {
-            const confirmation = confirm(`Tem a certeza que quer eliminar este Pokémon?`);
+        const confirmDeletePokemon = (pokemonId, pokemonName) => {
+            const confirmation = confirm(`Tem a certeza que quer eliminar o Pokémon ${pokemonName}?`);
             if (confirmation) {
-                myPokemon = myPokemon.filter(p => p.id !== pokemonId);
-                displayMyPokemon();
+                deletePokemon(pokemonId);
             }
         };
 
+        const deletePokemon = (pokemonId) => {
+            myPokemon = myPokemon.filter(p => p.id !== pokemonId);
+            displayMyPokemon();
+        };
+
         fetchMyPokemon();
-
-       
-
-
     </script>
 </body>
 </html>
