@@ -16,9 +16,7 @@ h1 {
     font-size: 54px;
 }
 
-.pokemon-image {
-    filter: grayscale(100%);
-}
+
 
 .pokemon-card {
     position: relative;

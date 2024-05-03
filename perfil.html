@@ -3,45 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokedex</title>
+    <title>Meus Pokémon</title>
     <link rel="stylesheet" href="perfil.css" />
     <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!-- Importação do Axios -->
     <style>
-        .pokemon-image {
-            filter: grayscale(100%);
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
-        .pokemon-card {
-            position: relative;
-            display: inline-block; /* Garante que os botões fiquem dentro do cartão */
-        }
-
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #BBB2EB;
-            opacity: 0.5;
-        }
-
-        .pokemon-info {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: #BBB2EB;
-            color: #fff;
+        .pokemon-item {
+            flex-basis: 200px;
+            margin: 10px;
             padding: 10px;
             text-align: center;
+            background-color: transparent; /* Adicionado fundo branco */
+            cursor: pointer; /* Adicionado para indicar que os Pokémon são clicáveis */
         }
 
-        .edit-button,
-        .delete-button {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
+        .pokemon-image {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+
+        .edit-button {
             cursor: pointer;
             color: white;
             background-color: #4CAF50;
@@ -50,80 +38,91 @@
             padding: 8px 16px;
             text-align: center;
             text-decoration: none;
-            display: inline-block;
             font-size: 16px;
-            margin: 4px 2px;
+            margin-right: 5px;
+            display: none; /* Inicialmente escondido */
         }
 
         .delete-button {
+            cursor: pointer;
+            color: white;
             background-color: #f44336;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            display: none; /* Inicialmente escondido */
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>A tua Pokedex</h1>
-        <ul id="pokedex"></ul>
-    </div>
-    <script src="/js/perfil.js"></script>
-
+    <h1>Meus Pokémon</h1>
+    <div class="container" id="pokemon-container"></div>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
     <script>
-        const pokedex = document.getElementById('pokedex');
+        const pokemonContainer = document.getElementById('pokemon-container');
+        let myPokemon = [];
 
-        const fetchPokemon = async () => {
-            const promises = [];
-            for (let i = 1; i <= 150; i++) {
-                const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
-                promises.push(fetch(url).then((res) => res.json()));
-            }
-            Promise.all(promises).then((results) => {
-                const pokemon = results.map((result) => ({
-                    name: result.name,
-                    image: result.sprites['front_default'],
-                    type: result.types.map((type) => type.type.name).join(', '),
-                    id: result.id
-                }));
-                displayPokemon(pokemon);
-            });
+        const fetchMyPokemon = async () => {
+            const randomPokemonIds = _.sampleSize(_.range(1, 898), 21); // IDs aleatórios de Pokémon
+
+            const requests = randomPokemonIds.map(id => axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`));
+            const responses = await Promise.all(requests);
+
+            myPokemon = responses.map(response => ({
+                id: response.data.id,
+                name: response.data.name,
+                image: response.data.sprites.front_default
+            }));
+
+            displayMyPokemon();
         };
 
-        const displayPokemon = (pokemon) => {
-            const pokemonHTMLString = pokemon.map((pokeman) => `
-                <li class="card pokemon-card" data-pokemon-id="${pokeman.id}">
-                    <div class="overlay"></div>
-                    <img class="card-image pokemon-image" src="${pokeman.image}"/>
-                    <div class="pokemon-info">
-                        <h2 class="card-title">${pokeman.id}. ${pokeman.name}</h2>
-                        <p class="card-subtitle">Type: ${pokeman.type}</p>
-                        <button class="edit-button" onclick="editPokemon(${pokeman.id})">Editar</button>
-                        <button class="delete-button" onclick="deletePokemon(${pokeman.id})">Eliminar</button>
-                    </div>
-                    <div class="stats-container" style="display:none;"></div>
-                </li>
+        const displayMyPokemon = () => {
+            pokemonContainer.innerHTML = myPokemon.map(pokemon => `
+            <div class="pokemon-item" data-pokemon-id="${pokemon.id}" onclick="selectPokemon(${pokemon.id})">
+                    <img class="pokemon-image" src="${pokemon.image}" alt="${pokemon.name}" />
+                    <h3>${pokemon.name}</h3>
+                    <button class="edit-button" onclick="editPokemon(${pokemon.id})">Editar</button>
+                    <button class="delete-button" onclick="deletePokemon(${pokemon.id})">Eliminar</button>
+                </div>
             `).join('');
-            pokedex.innerHTML = pokemonHTMLString;
         };
+
+        const selectPokemon = (pokemonId) => {
+                // Exibe os botões de edição e exclusão para o Pokémon selecionado
+                const pokemonItem = document.querySelector(`.pokemon-item[data-pokemon-id="${pokemonId}"]`);
+                const editButton = pokemonItem.querySelector('.edit-button');
+                const deleteButton = pokemonItem.querySelector('.delete-button');
+                editButton.style.display = 'inline-block';
+                deleteButton.style.display = 'inline-block';
+        };
+
 
         const editPokemon = (pokemonId) => {
-            alert(`Editar Pokémon com ID ${pokemonId}`);
-            // Aqui você pode adicionar a lógica para editar o Pokémon com o ID fornecido
+            const pokemon = myPokemon.find(p => p.id === pokemonId);
+            const newName = prompt(`Novo nome para ${pokemon.name}:`, pokemon.name);
+            if (newName !== null) {
+                pokemon.name = newName;
+                displayMyPokemon();
+            }
         };
 
         const deletePokemon = (pokemonId) => {
-            const confirmation = confirm(`Tem a certeza que quer eliminar o Pokémon com ID ${pokemonId}?`);
+            const confirmation = confirm(`Tem a certeza que quer eliminar este Pokémon?`);
             if (confirmation) {
-                const card = document.querySelector(`.card[data-pokemon-id="${pokemonId}"]`);
-                if (card) {
-                    card.remove();
-                    alert(`Pokémon com ID ${pokemonId} eliminado com sucesso.`);
-                    // Aqui você pode adicionar a lógica para realmente excluir o Pokémon do seu sistema
-                } else {
-                    alert(`Pokémon com ID ${pokemonId} não encontrado.`);
-                }
+                myPokemon = myPokemon.filter(p => p.id !== pokemonId);
+                displayMyPokemon();
             }
         };
 
-        fetchPokemon();
+        fetchMyPokemon();
+
+       
+
+
     </script>
 </body>
 </html>
