@@ -26,7 +26,14 @@
         .pokemon-image {
             width: 100px;
             height: 100px;
-            margin-bottom: 10px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .pokemon-name {
+            margin-top: 5px;
+            font-size: 16px;
+            text-align: center;
         }
 
         .edit-button{
@@ -58,7 +65,7 @@
             display: none; /* Inicialmente escondido */
             width: 80px; /* Largura fixa */
         }
-           
+        
     </style>
 </head>
 <body>
@@ -90,7 +97,7 @@
                 <div class="pokemon-item" data-pokemon-id="${pokemon.id}" onclick="selectPokemon(event, ${pokemon.id})">
                     <!-- Adicionado o evento onclick e o atributo data-pokemon-id -->
                     <img class="pokemon-image" src="${pokemon.image}" alt="${pokemon.name}" />
-                    <h3>${pokemon.name}</h3>
+                    <p class="pokemon-name">${pokemon.name}</p>
                     <button class="edit-button">Editar</button>
                     <button class="delete-button">Eliminar</button>
                 </div>
