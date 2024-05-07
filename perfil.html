@@ -6,7 +6,7 @@
     <title>Meus Pokémon</title>
     <link rel="stylesheet" href="perfil.css" />
     <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!-- Importação do Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> 
     <style>
         .container {
             display: flex;
@@ -18,10 +18,8 @@
             flex-basis: 200px;
             margin: 10px;
             padding: 10px;
-            border: 1px solid #ccc;
             border-radius: 5px;
             text-align: center;
-            background-color: #f0f0f0; /* Cor de fundo */
             cursor: pointer; /* Adicionado para indicar que os Pokémon são clicáveis */
         }
 
@@ -31,32 +29,36 @@
             margin-bottom: 10px;
         }
 
-        .edit-button {
+        .edit-button{
             cursor: pointer;
             color: white;
-            background-color: #4CAF50;
-            border: none;
-            border-radius: 4px;
-            padding: 8px 16px;
-            text-align: center;
-            text-decoration: none;  
-            font-size: 16px;
-            margin-right: 5px;
-            display: none; /* Inicialmente escondido */
-        }
-
-        .delete-button {
-            cursor: pointer;
-            color: white;
-            background-color: #f44336;
             border: none;
             border-radius: 4px;
             padding: 8px 16px;
             text-align: center;
             text-decoration: none;
             font-size: 16px;
+            margin-right: 5px;
             display: none; /* Inicialmente escondido */
+            width: 80px; /* Largura fixa */
+            background-color: #4CAF50; /* Verde para o botão de edição */
         }
+
+        .delete-button {
+            cursor: pointer;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin-right: 105px;
+            background-color: #f44336; /* Vermelho para o botão de exclusão */
+            display: none; /* Inicialmente escondido */
+            width: 80px; /* Largura fixa */
+        }
+           
     </style>
 </head>
 <body>
@@ -85,47 +87,40 @@
 
         const displayMyPokemon = () => {
             pokemonContainer.innerHTML = myPokemon.map(pokemon => `
-                <div class="pokemon-item" data-pokemon-id="${pokemon.id}" onclick="selectPokemon(${pokemon.id})">
+                <div class="pokemon-item" data-pokemon-id="${pokemon.id}" onclick="selectPokemon(event, ${pokemon.id})">
                     <!-- Adicionado o evento onclick e o atributo data-pokemon-id -->
                     <img class="pokemon-image" src="${pokemon.image}" alt="${pokemon.name}" />
                     <h3>${pokemon.name}</h3>
-                    <button class="edit-button" onclick="editPokemon(${pokemon.id})">Editar</button>
-                    <button class="delete-button" onclick="confirmDeletePokemon(${pokemon.id}, '${pokemon.name}')">Eliminar</button>
+                    <button class="edit-button">Editar</button>
+                    <button class="delete-button">Eliminar</button>
                 </div>
             `).join('');
         };
 
-        const selectPokemon = (pokemonId) => {
-    // Exibe os botões de edição e exclusão para o Pokémon selecionado
-    const pokemonItem = document.querySelector(`.pokemon-item[data-pokemon-id="${pokemonId}"]`);
-    const editButton = pokemonItem.querySelector('.edit-button');
-    const deleteButton = pokemonItem.querySelector('.delete-button');
-    editButton.style.display = 'inline-block';
-    deleteButton.style.display = 'inline-block';
-};
-
-        const editPokemon = (pokemonId) => {
+        const selectPokemon = (event, pokemonId) => {
             const pokemon = myPokemon.find(p => p.id === pokemonId);
-            const newName = prompt(`Novo nome para ${pokemon.name}:`, pokemon.name);
-            if (newName !== null) {
-                pokemon.name = newName;
-                displayMyPokemon();
-            }
+            const pokemonItem = event.currentTarget;
+            const editButton = pokemonItem.querySelector('.edit-button');
+            const deleteButton = pokemonItem.querySelector('.delete-button');
+            editButton.style.display = 'inline-block';
+            deleteButton.style.display = 'inline-block';
+            editButton.addEventListener('click', () => editPokemon(pokemon));
+            deleteButton.addEventListener('click', () => confirmDeletePokemon(pokemon));
         };
 
-        const confirmDeletePokemon = (pokemonId, pokemonName) => {
-    const confirmationMessage = `
-        <div class="confirmation-message">
-            <p>Tem certeza que deseja excluir o Pokémon ${pokemonName}?</p>
-            <div class="confirmation-buttons">
-                <button class="confirmation-button confirm" onclick="deletePokemon(${pokemonId})">Confirmar</button>
-                <button class="confirmation-button cancel" onclick="cancelDelete()">Cancelar</button>
-            </div>
-        </div>
-    `;
-    document.body.insertAdjacentHTML('beforeend', confirmationMessage);
-};
-
+        const confirmDeletePokemon = (pokemon) => {
+            const confirmationMessage = `
+                <div class="confirmation-message">
+                    <img class="pokemon-image" src="${pokemon.image}" alt="${pokemon.name}" />
+                    <p>Tem certeza que deseja excluir o Pokémon ${pokemon.name}?</p>
+                    <div class="confirmation-buttons">
+                        <button class="confirmation-button confirm" onclick="deletePokemon(${pokemon.id})">Confirmar</button>
+                        <button class="confirmation-button cancel" onclick="cancelDelete()">Cancelar</button>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', confirmationMessage);
+        };
 
         const deletePokemon = (pokemonId) => {
             removeConfirmationMessage(); // Remover a mensagem de confirmação
@@ -133,17 +128,24 @@
             displayMyPokemon();
         };
 
+        const editPokemon = (pokemon) => {
+            const newName = prompt(`Novo nome para ${pokemon.name}:`, pokemon.name);
+            if (newName !== null) {
+                pokemon.name = newName;
+                displayMyPokemon();
+            }
+        };
+
         const cancelDelete = () => {
             removeConfirmationMessage(); // Remover a mensagem de confirmação
         };
 
         const removeConfirmationMessage = () => {
-    const confirmationMessage = document.querySelector('.confirmation-message');
-    if (confirmationMessage) {
-        confirmationMessage.remove();
-    }
-};
-
+            const confirmationMessage = document.querySelector('.confirmation-message');
+            if (confirmationMessage) {
+                confirmationMessage.remove();
+            }
+        };
 
         fetchMyPokemon();
     </script>
