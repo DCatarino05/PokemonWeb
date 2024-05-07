@@ -105,15 +105,24 @@
         };
 
         const selectPokemon = (event, pokemonId) => {
-            const pokemon = myPokemon.find(p => p.id === pokemonId);
-            const pokemonItem = event.currentTarget;
-            const editButton = pokemonItem.querySelector('.edit-button');
-            const deleteButton = pokemonItem.querySelector('.delete-button');
-            editButton.style.display = 'inline-block';
-            deleteButton.style.display = 'inline-block';
-            editButton.addEventListener('click', () => editPokemon(pokemon));
-            deleteButton.addEventListener('click', () => confirmDeletePokemon(pokemon));
-        };
+        // Limpar botões antigos
+        clearOldButtons();
+
+        const pokemon = myPokemon.find(p => p.id === pokemonId);
+        const pokemonItem = event.currentTarget;
+        const editButton = pokemonItem.querySelector('.edit-button');
+        const deleteButton = pokemonItem.querySelector('.delete-button');
+        editButton.style.display = 'inline-block';
+        deleteButton.style.display = 'inline-block';
+        editButton.addEventListener('click', () => editPokemon(pokemon));
+        deleteButton.addEventListener('click', () => confirmDeletePokemon(pokemon));
+    };
+
+    // Função para limpar os botões antigos
+    const clearOldButtons = () => {
+        const oldButtons = document.querySelectorAll('.edit-button, .delete-button');
+        oldButtons.forEach(button => button.style.display = 'none');
+    };
 
         const confirmDeletePokemon = (pokemon) => {
             const confirmationMessage = `

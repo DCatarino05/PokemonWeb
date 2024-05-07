@@ -119,27 +119,29 @@ h1 {
     text-align: center;
 }
 
+.pokemon-item {
+    position: relative; /* Adiciona posição relativa para que os botões possam ser posicionados relativamente a este elemento */
+    cursor: pointer; /* Adicionado para indicar que os Pokémon são clicáveis */
+}
+
 .edit-button,
 .delete-button {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    color: white;
-    background-color: #4CAF50;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 16px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
+    bottom: -25px; /* Definir um valor negativo maior para mover os botões para baixo */
+    display: none;
+    width: 80px;
+}
+
+.edit-button {
+    left: 25px; /* Ajustar o valor para mover o botão mais para a direita */
 }
 
 .delete-button {
-    background-color: #f44336;
+    left: 110px; /* Ajustar o valor para mover o botão mais para a direita */
 }
+
+
+
 
 #pokedex {
     display: grid;
