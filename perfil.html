@@ -7,66 +7,7 @@
     <link rel="stylesheet" href="perfil.css" />
     <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> 
-    <style>
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
 
-        .pokemon-item {
-            flex-basis: 200px;
-            margin: 10px;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: center;
-            cursor: pointer; /* Adicionado para indicar que os Pokémon são clicáveis */
-        }
-
-        .pokemon-image {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto;
-            display: block;
-        }
-
-        .pokemon-name {
-            margin-top: 5px;
-            font-size: 16px;
-            text-align: center;
-        }
-
-        .edit-button{
-            cursor: pointer;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            padding: 8px 16px;
-            text-align: center;
-            text-decoration: none;
-            font-size: 16px;
-            margin-right: 5px;
-            display: none; /* Inicialmente escondido */
-            width: 80px; /* Largura fixa */
-            background-color: #4CAF50; /* Verde para o botão de edição */
-        }
-
-        .delete-button {
-            cursor: pointer;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            padding: 8px 16px;
-            text-align: center;
-            text-decoration: none;
-            font-size: 16px;
-            margin-right: 105px;
-            background-color: #f44336; /* Vermelho para o botão de exclusão */
-            display: none; /* Inicialmente escondido */
-            width: 80px; /* Largura fixa */
-        }
-        
-    </style>
 </head>
 <body>
     <h1>Meus Pokémon</h1>
@@ -128,7 +69,7 @@
             const confirmationMessage = `
                 <div class="confirmation-message">
                     <img class="pokemon-image" src="${pokemon.image}" alt="${pokemon.name}" />
-                    <p>Tem certeza que deseja excluir o Pokémon ${pokemon.name}?</p>
+                    <p class="confirmarel">Tem certeza que deseja excluir o Pokémon ${pokemon.name}?</p>
                     <div class="confirmation-buttons">
                         <button class="confirmation-button confirm" onclick="deletePokemon(${pokemon.id})">Confirmar</button>
                         <button class="confirmation-button cancel" onclick="cancelDelete()">Cancelar</button>
@@ -145,12 +86,34 @@
         };
 
         const editPokemon = (pokemon) => {
-            const newName = prompt(`Novo nome para ${pokemon.name}:`, pokemon.name);
-            if (newName !== null) {
-                pokemon.name = newName;
-                displayMyPokemon();
-            }
+        const editConfirmationMessage = document.querySelector('.edit-confirmation-message');
+        const editPokemonImage = document.getElementById('edit-pokemon-image');
+        const editPokemonNameInput = document.getElementById('edit-pokemon-name');
+
+        // Definir a imagem do Pokémon
+        editPokemonImage.src = pokemon.image;
+        editPokemonImage.alt = pokemon.name;
+
+        // Mostrar o pop-up de edição
+        editConfirmationMessage.style.display = 'block';
+        editPokemonNameInput.value = pokemon.name;
+
+        // Confirmar a edição
+        window.confirmEdit = () => {
+            const newName = editPokemonNameInput.value;
+            pokemon.name = newName;
+            displayMyPokemon();
+            editConfirmationMessage.style.display = 'none'; // Esconder o pop-up de edição
         };
+
+        // Cancelar a edição
+        window.cancelEdit = () => {
+            editConfirmationMessage.style.display = 'none'; // Esconder o pop-up de edição
+        };
+    };
+
+
+
 
         const cancelDelete = () => {
             removeConfirmationMessage(); // Remover a mensagem de confirmação
@@ -165,5 +128,15 @@
 
         fetchMyPokemon();
     </script>
+    <div class="edit-confirmation-message">
+        <img class="pokemon-image" id="edit-pokemon-image" />
+        <p>Digite o novo nome para o Pokémon:</p>
+        <input type="text" id="edit-pokemon-name" />
+        <button class="confirm-button" onclick="confirmEdit()">Confirmar</button>
+        <button class="cancel-button" onclick="cancelEdit()">Cancelar</button>
+    </div>
+
+
+    
 </body>
 </html>

@@ -6,9 +6,74 @@ body {
 }
 
 .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     padding: 40px;
     margin: 0 auto;
 }
+
+.pokemon-item {
+    flex-basis: 200px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer; /* Adicionado para indicar que os Pokémon são clicáveis */
+    position: relative; /* Adiciona posição relativa para que os botões possam ser posicionados relativamente a este elemento */
+    cursor: pointer; /* Adicionado para indicar que os Pokémon são clicáveis */
+}
+
+.pokemon-image {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    display: block;
+}
+
+.pokemon-name {
+    margin-top: 5px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.edit-button{
+    cursor: pointer;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin-right: 5px;
+    display: none; /* Inicialmente escondido */
+    width: 80px; /* Largura fixa */
+    background-color: #4CAF50; /* Verde para o botão de edição */
+    position: absolute;
+    bottom: -25px; /* Definir um valor negativo maior para mover os botões para baixo */
+    text-align: center;
+}
+
+.delete-button {
+    cursor: pointer;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin-right: 105px;
+    background-color: #f44336; /* Vermelho para o botão de exclusão */
+    display: none; /* Inicialmente escondido */
+    width: 80px; /* Largura fixa */
+    position: absolute;
+    bottom: -25px; /* Definir um valor negativo maior para mover os botões para baixo */
+    text-align: center;
+}
+
+
 
 h1 {
     text-transform: uppercase;
@@ -119,10 +184,7 @@ h1 {
     text-align: center;
 }
 
-.pokemon-item {
-    position: relative; /* Adiciona posição relativa para que os botões possam ser posicionados relativamente a este elemento */
-    cursor: pointer; /* Adicionado para indicar que os Pokémon são clicáveis */
-}
+
 
 .edit-button,
 .delete-button {
@@ -130,6 +192,7 @@ h1 {
     bottom: -25px; /* Definir um valor negativo maior para mover os botões para baixo */
     display: none;
     width: 80px;
+    text-align: center;
 }
 
 .edit-button {
@@ -138,6 +201,7 @@ h1 {
 
 .delete-button {
     left: 110px; /* Ajustar o valor para mover o botão mais para a direita */
+    
 }
 
 
@@ -177,6 +241,54 @@ h1 {
 .card-image {
     height: 180px;
 }
+
+.edit-confirmation-message {
+    display: none;
+    position: fixed;
+    text-align: center; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    z-index: 1001;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.edit-confirmation-message p {
+    margin: 0 0 10px;
+    text-align: center;
+}
+
+.edit-confirmation-message input[type="text"] {
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.edit-confirmation-message button {
+    cursor: pointer;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 10px 5px;
+}
+
+.confirm-button {
+    background-color: #4CAF50; /* Verde para o botão de confirmação */
+}
+
+.cancel-button {
+    background-color: #f44336; /* Vermelho para o botão de cancelamento */
+}
+
+.confirmarel{
+    color: black;
+}
+
 
 @keyframes bounce {
     20% {
