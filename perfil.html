@@ -10,6 +10,7 @@
 
 </head>
 <body>
+    <button class="button btn-back">Voltar</button>
     <h1>Meus Pokémon</h1>
     <div class="container" id="pokemon-container"></div>
     
@@ -32,6 +33,7 @@
 
             displayMyPokemon();
         };
+
 
         const displayMyPokemon = () => {
             pokemonContainer.innerHTML = myPokemon.map(pokemon => `
@@ -127,6 +129,12 @@
         };
 
         fetchMyPokemon();
+
+        const buttonBack = document.querySelector('.btn-back');
+      buttonBack.addEventListener('click', () => {
+        window.location.href = "pokedex.html"; // Substitua "outra_pagina.html" pelo caminho da outra página
+      });
+    
     </script>
     <div class="edit-confirmation-message">
         <img class="pokemon-image" id="edit-pokemon-image" />

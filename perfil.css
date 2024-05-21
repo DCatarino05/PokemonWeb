@@ -289,6 +289,29 @@ h1 {
     color: black;
 }
 
+.btn-back {
+    position: fixed;
+    top: 4.5%; /* Ajuste conforme necessário */
+    left: 20px; /* Ajuste conforme necessário */
+    z-index: 9999; /* Certifique-se de que o botão esteja acima de outros elementos */
+    padding: 8px 12px; /* Ajuste o preenchimento do botão */
+    width: auto; /* Defina a largura como automática para que o botão se ajuste ao conteúdo */
+    border: 2px solid #000;
+    border-radius: 5px;
+    font-size: clamp(8px, 5vw, 1rem);
+    font-weight: 600;
+    color: white;
+    background-color: #444;
+    box-shadow: -2px 3px 0 #222, -4px 6px 0 #000;
+  }
+  
+  .button:active {
+    box-shadow: inset -4px 4px 0 #222;
+    font-size: 0.9rem;
+  }
+
+ 
+
 
 @keyframes bounce {
     20% {
