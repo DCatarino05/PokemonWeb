@@ -156,5 +156,15 @@ main {
   width: auto; /* Defina a largura como automática para que o botão se ajuste ao conteúdo */
 }
 
+.btn-perfil {
+  position: fixed;
+  top: 20px; /* Ajuste conforme necessário */
+  left: 110px; /* Ajuste conforme necessário */
+  z-index: 9999; /* Certifique-se de que o botão esteja acima de outros elementos */
+  font-size: 14px; /* Ajuste o tamanho da fonte */
+  padding: 8px 12px; /* Ajuste o preenchimento do botão */
+  width: auto; /* Defina a largura como automática para que o botão se ajuste ao conteúdo */
+}
+
 
 

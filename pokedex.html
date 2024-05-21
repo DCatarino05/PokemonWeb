@@ -9,6 +9,7 @@
 </head>
 <body class="index-body">
   <button class="button btn-back">Voltar</button>
+  <button class="button btn-perfil">Perfil</button>
 
   <div id="video-background">
     <video autoplay loop muted class="video-background">
@@ -58,6 +59,12 @@
         window.location.href = "index.html"; // Substitua "outra_pagina.html" pelo caminho da outra página
       });
     });
+
+    const buttonPerfil = document.querySelector('.btn-perfil');
+      buttonPerfil.addEventListener('click', () => {
+        window.location.href = "perfil.html"; // Substitua "perfil.html" pelo caminho da página de perfil
+      });
+
     document.addEventListener("DOMContentLoaded", function() {
       const pokedexImage = document.querySelector('.pokedex');
       const pokemonTeam = localStorage.getItem('pokemonTeam');
