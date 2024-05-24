@@ -41,9 +41,9 @@
   </main>
   <script>
     const teamPokemons = {
-      valor: [4,5,6,45,46,47,98,99,100,101,118,119,124,126,129,136,146,218,219,224,225,383,380 ], 
-    instinct: [ 14,15,18,172,25,26,27,28,38,54,63,64,65,69,70,71,77,78,96,97,125,135,145], 
-    mystic: [7, 8, 9,29,30,31,55,60,61,62,66,67,68,72,73,130,131,132,134,138,139,147,148,144] 
+      valor: [4, 5, 6, 45, 46, 47, 98, 99, 100, 101, 118, 119, 124, 126, 129, 136, 146, 218, 219, 224, 225, 383, 380],
+      instinct: [14, 15, 18, 172, 25, 26, 27, 28, 38, 54, 63, 64, 65, 69, 70, 71, 77, 78, 96, 97, 125, 135, 145],
+      mystic: [7, 8, 9, 29, 30, 31, 55, 60, 61, 62, 66, 67, 68, 72, 73, 130, 131, 132, 134, 138, 139, 147, 148, 144]
     };
 
     let searchPokemon = 0;
@@ -54,11 +54,13 @@
       buttonBack.addEventListener('click', () => {
         window.location.href = "index.html"; 
       });
+      
 
       const buttonPerfil = document.querySelector('.btn-perfil');
       buttonPerfil.addEventListener('click', () => {
-        window.location.href = "perfil.html"; 
+        window.location.href = "perfil.html";
       });
+      
 
       const pokedexImage = document.querySelector('.pokedex');
       const pokemonTeam = localStorage.getItem('pokemonTeam');
@@ -68,14 +70,14 @@
         searchPokemon = currentTeamPokemonIds[0]; // Start with the first Pokémon of the team
 
         switch (pokemonTeam) {
-          case 'red':
+          case 'valor':
             pokedexImage.src = "./images/pokedex.png";
             break;
-          case 'blue':
-            pokedexImage.src = "./images/pokedexazul.png";
-            break;
-          case 'yellow':
+          case 'instinct':
             pokedexImage.src = "./images/pokedexamarela.png";
+            break;
+          case 'mystic':
+            pokedexImage.src = "./images/pokedexazul.png";
             break;
           default:
             pokedexImage.src = "./images/pokedex.png";
@@ -87,6 +89,7 @@
         window.location.href = 'escolha-de-time.html';
       }
     });
+    
 
     const pokemonName = document.querySelector('.pokemon__name');
     const pokemonNumber = document.querySelector('.pokemon__number');
@@ -112,7 +115,7 @@
       const data = await fetchPokemon(pokemonId);
 
       if (data) {
-        return data.stats.map(stat => `${stat.stat.name}: ${stat.base_stat}`);
+        return data.stats;
       } else {
         console.error('Erro ao buscar estatísticas do Pokémon');
         return [];
@@ -175,20 +178,57 @@
     });
 
     const displayPokemonStats = (stats) => {
-      statsList.innerHTML = '';
+  statsList.innerHTML = '';
 
-      if (stats.length > 0) {
-        stats.forEach(stat => {
-          const statElement = document.createElement('h2');
-          statElement.textContent = stat;
-          statsList.appendChild(statElement);
-        });
+  if (stats.length > 0) {
+    stats.forEach(stat => {
+      const statElement = document.createElement('div');
+      statElement.classList.add('stat-bar');
 
-        pokemonStatsContainer.style.display = 'flex';
-      } else {
-        pokemonStatsContainer.style.display = 'none';
-      }
-    }
+      const statName = document.createElement('div');
+      statName.classList.add('stat-name');
+      statName.textContent = stat.stat.name;
+
+      const statValue = document.createElement('div');
+      statValue.classList.add('stat-value');
+      const statValueSpan = document.createElement('span');
+      statValueSpan.style.width = `${stat.base_stat * 3}px`; // Definindo a largura da barra baseada no valor da estatística
+      statValueSpan.style.backgroundColor = getColorForStat(stat.stat.name); // Obtendo a cor para a estatística
+      statValueSpan.textContent = stat.base_stat; // Exibindo o valor numérico sobre a barra
+      statValue.appendChild(statValueSpan);
+
+      statElement.appendChild(statName);
+      statElement.appendChild(statValue);
+
+      statsList.appendChild(statElement);
+    });
+
+    pokemonStatsContainer.style.display = 'flex';
+  } else {
+    pokemonStatsContainer.style.display = 'none';
+  }
+}
+
+// Função para obter a cor da barra com base na estatística
+const getColorForStat = (statName) => {
+  switch (statName) {
+    case 'hp':
+      return 'green'; // Verde para HP
+    case 'attack':
+      return 'red'; // Vermelho para Ataque
+    case 'defense':
+      return 'blue'; // Azul para Defesa
+    case 'special-attack':
+      return 'orange'; // Laranja para Ataque Especial
+    case 'special-defense':
+      return 'purple'; // Roxo para Defesa Especial
+    case 'speed':
+      return 'yellow'; // Amarelo para Velocidade
+    default:
+      return 'gray'; // Cinza para outras estatísticas
+  }
+}
+
   </script>
 </body>
 </html>
