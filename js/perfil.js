@@ -2,9 +2,9 @@ const pokemonContainer = document.getElementById('pokemon-container');
 let myPokemon = [];
 
 const teamPokemons = {
-    valor: [4,5,6,45,46,47,98,99,100,101,118,119,124,126,129,136,146,218,219,224,225,383,380 ], 
-    instinct: [ 14,15,18,172,25,26,27,28,38,54,63,64,65,69,70,71,77,78,96,97,125,135,145], 
-    mystic: [7, 8, 9,29,30,31,55,60,61,62,66,67,68,72,73,130,131,132,134,138,139,147,148,144] 
+    valor: [4,5,6,45,46,47,98,99,100,101,118,119,124,126,129,136,146,218,219,224,225,383,380,386,137,233,474,513 ], 
+    instinct: [ 14,15,18,172,25,26,27,28,38,54,63,64,65,69,70,71,77,78,96,97,125,135,145,595,596,181,466,415], 
+    mystic: [7, 8, 9,29,30,31,55,60,61,62,66,67,68,72,73,130,131,132,134,138,139,147,148,144,501,502,503,393] 
 };
 
 const fetchMyPokemon = async () => {
@@ -116,4 +116,9 @@ fetchMyPokemon();
 const buttonBack = document.querySelector('.btn-back');
 buttonBack.addEventListener('click', () => {
     window.location.href = 'index.html'; 
+});
+
+const buttonPokedex = document.querySelector('.btn-pokedex');
+buttonPokedex.addEventListener('click', () => {
+    window.location.href = 'pokedex.html'; 
 });
