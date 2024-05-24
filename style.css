@@ -151,13 +151,7 @@ main {
 }
 
 .btn-perfil {
-  position: fixed;
-  top: 2%;
-  left: 95%;
-  z-index: 9999;
-  font-size: 14px;
-  padding: 8px 12px;
-  width: auto;
+  display: none;
 }
 
 .stat-bar {
