@@ -117,3 +117,8 @@ const buttonBack = document.querySelector('.btn-back');
 buttonBack.addEventListener('click', () => {
     window.location.href = 'index.html'; 
 });
+
+const buttonPokedex = document.querySelector('.btn-pokedex');
+buttonPokedex.addEventListener('click', () => {
+    window.location.href = 'pokedex.html'; 
+});
