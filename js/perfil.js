@@ -3,8 +3,8 @@ let myPokemon = [];
 
 const teamPokemons = {
     valor: [4, 5, 6], // Charmander, Charmeleon, Charizard
-    instinct: [25, 26, 27], // Pikachu, Raichu, Sandshrew
-    mystic: [7, 8, 9] // Squirtle, Wartortle, Blastoise
+    instinct: [ 14,15,18,172,25,26,27,28,38,54,63,64,65,69,70,71,77,78,96,97,125,135,145], // Pikachu, Raichu, Sandshrew
+    mystic: [7, 8, 9,29,30,31,55,60,61,62,66,67,68,72,73,130,131,132,134,138,139,147,148,144] // Squirtle, Wartortle, Blastoise
 };
 
 const fetchMyPokemon = async () => {
