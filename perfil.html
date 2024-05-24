@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="perfil.css" />
     <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> 
-
 </head>
 <body>
     <button class="button btn-back">Voltar</button>
@@ -17,15 +16,12 @@
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
     <script src="js/perfil.js"></script>
 
-    <div class="edit-confirmation-message">
+    <div class="edit-confirmation-message" style="display: none;">
         <img class="pokemon-image" id="edit-pokemon-image" />
         <p>Digite o novo nome para o Pokémon:</p>   
         <input type="text" id="edit-pokemon-name" />
         <button class="confirm-button" onclick="confirmEdit()">Confirmar</button>
         <button class="cancel-button" onclick="cancelEdit()">Cancelar</button>
     </div>
-
-
-    
 </body>
 </html>

@@ -1,10 +1,22 @@
 const pokemonContainer = document.getElementById('pokemon-container');
 let myPokemon = [];
 
-const fetchMyPokemon = async () => {
-    const randomPokemonIds = _.sampleSize(_.range(1, 898), 21);
+const teamPokemons = {
+    valor: [4, 5, 6], // Charmander, Charmeleon, Charizard
+    instinct: [25, 26, 27], // Pikachu, Raichu, Sandshrew
+    mystic: [7, 8, 9] // Squirtle, Wartortle, Blastoise
+};
 
-    const requests = randomPokemonIds.map(id => axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`));
+const fetchMyPokemon = async () => {
+    const team = localStorage.getItem('pokemonTeam');
+    if (!team || !teamPokemons[team]) {
+        alert('Nenhuma equipe selecionada!');
+        window.location.href = 'escolha-de-time.html';
+        return;
+    }
+
+    const pokemonIds = teamPokemons[team];
+    const requests = pokemonIds.map(id => axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`));
     const responses = await Promise.all(requests);
 
     myPokemon = responses.map(response => ({
@@ -16,37 +28,33 @@ const fetchMyPokemon = async () => {
     displayMyPokemon();
 };
 
-
 const displayMyPokemon = () => {
     pokemonContainer.innerHTML = myPokemon.map(pokemon => `
         <div class="pokemon-item" data-pokemon-id="${pokemon.id}" onclick="selectPokemon(event, ${pokemon.id})">
-            <!-- Adicionado o evento onclick e o atributo data-pokemon-id -->
             <img class="pokemon-image" src="${pokemon.image}" alt="${pokemon.name}" />
             <p class="pokemon-name">${pokemon.name}</p>
-            <button class="edit-button">Editar</button>
-            <button class="delete-button">Eliminar</button>
+            <button class="edit-button" style="display: none;">Editar</button>
+            <button class="delete-button" style="display: none;">Eliminar</button>
         </div>
     `).join('');
 };
 
 const selectPokemon = (event, pokemonId) => {
-
-clearOldButtons();
-
-const pokemon = myPokemon.find(p => p.id === pokemonId);
-const pokemonItem = event.currentTarget;
-const editButton = pokemonItem.querySelector('.edit-button');
-const deleteButton = pokemonItem.querySelector('.delete-button');
-editButton.style.display = 'inline-block';
-deleteButton.style.display = 'inline-block';
-editButton.addEventListener('click', () => editPokemon(pokemon));
-deleteButton.addEventListener('click', () => confirmDeletePokemon(pokemon));
+    clearOldButtons();
+    
+    const pokemon = myPokemon.find(p => p.id === pokemonId);
+    const pokemonItem = event.currentTarget;
+    const editButton = pokemonItem.querySelector('.edit-button');
+    const deleteButton = pokemonItem.querySelector('.delete-button');
+    editButton.style.display = 'inline-block';
+    deleteButton.style.display = 'inline-block';
+    editButton.addEventListener('click', () => editPokemon(pokemon));
+    deleteButton.addEventListener('click', () => confirmDeletePokemon(pokemon));
 };
 
-
 const clearOldButtons = () => {
-const oldButtons = document.querySelectorAll('.edit-button, .delete-button');
-oldButtons.forEach(button => button.style.display = 'none');
+    const oldButtons = document.querySelectorAll('.edit-button, .delete-button');
+    oldButtons.forEach(button => button.style.display = 'none');
 };
 
 const confirmDeletePokemon = (pokemon) => {
@@ -70,30 +78,27 @@ const deletePokemon = (pokemonId) => {
 };
 
 const editPokemon = (pokemon) => {
-const editConfirmationMessage = document.querySelector('.edit-confirmation-message');
-const editPokemonImage = document.getElementById('edit-pokemon-image');
-const editPokemonNameInput = document.getElementById('edit-pokemon-name');
+    const editConfirmationMessage = document.querySelector('.edit-confirmation-message');
+    const editPokemonImage = document.getElementById('edit-pokemon-image');
+    const editPokemonNameInput = document.getElementById('edit-pokemon-name');
 
-editPokemonImage.src = pokemon.image;
-editPokemonImage.alt = pokemon.name;
+    editPokemonImage.src = pokemon.image;
+    editPokemonImage.alt = pokemon.name;
 
-editConfirmationMessage.style.display = 'block';
-editPokemonNameInput.value = pokemon.name;
+    editConfirmationMessage.style.display = 'block';
+    editPokemonNameInput.value = pokemon.name;
 
-window.confirmEdit = () => {
-    const newName = editPokemonNameInput.value;
-    pokemon.name = newName;
-    displayMyPokemon();
-    editConfirmationMessage.style.display = 'none'; // Esconder o pop-up de edição
+    window.confirmEdit = () => {
+        const newName = editPokemonNameInput.value;
+        pokemon.name = newName;
+        displayMyPokemon();
+        editConfirmationMessage.style.display = 'none';
+    };
+
+    window.cancelEdit = () => {
+        editConfirmationMessage.style.display = 'none';
+    };
 };
-
-window.cancelEdit = () => {
-    editConfirmationMessage.style.display = 'none'; // Esconder o pop-up de edição
-};
-};
-
-
-
 
 const cancelDelete = () => {
     removeConfirmationMessage(); 
@@ -110,5 +115,5 @@ fetchMyPokemon();
 
 const buttonBack = document.querySelector('.btn-back');
 buttonBack.addEventListener('click', () => {
-window.location.href = "pokedex.html"; 
+    window.location.href = 'index.html'; 
 });
