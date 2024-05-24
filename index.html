@@ -19,14 +19,14 @@
   <script>
     function selectTeam(team) {
       localStorage.setItem('pokemonTeam', team);
-      window.location.href = "pokedex.html";
+      window.location.href = "perfil.html";
     }
 
     document.getElementById("teamForm").addEventListener("submit", function(event) {
     event.preventDefault();
     const selectedTeam = document.querySelector('input[name="team"]:checked').value;
     localStorage.setItem('pokemonTeam', selectedTeam);
-    window.location.href = "pokedex.html"; 
+    window.location.href = "perfil.html"; 
   });
   </script>
 </body>
