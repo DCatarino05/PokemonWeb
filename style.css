@@ -119,51 +119,51 @@ main {
 }
 
 .pokemon-stats-container {
-  position: absolute; /* Posição absoluta para garantir que não afete o layout da Pokédex */
-  left: 155%; /* Ajuste conforme necessário */
-  top: 60%; /* Ajuste conforme necessário */
-  transform: translate(-50%, -50%); /* Centraliza o elemento */
-  text-align: left; /* Alinha o texto à esquerda */
+  position: absolute; 
+  left: 155%; 
+  top: 60%; 
+  transform: translate(-50%, -50%); 
+  text-align: left; 
 }
 
 .pokemon-stats {
   max-width: 200px;
-  margin: 0 auto; /* Centraliza horizontalmente */
+  margin: 0 auto; 
   margin-bottom: 20px;
-  display: flex; /* Define o layout flexível */
+  display: flex; 
   color: white;
 }
 
 .pokemon-stats h2 {
-  margin-right: 5%; /* Adiciona espaço entre os elementos */
+  margin-right: 5%; 
 }
 
 .estatisticas {
   position: absolute;
-  top: 40%; /* Ajuste conforme necessário */
-  left: 190%; /* Ajuste conforme necessário */
-  transform: translateX(-50%); /* Centraliza horizontalmente */
+  top: 40%; 
+  left: 190%; 
+  transform: translateX(-50%); 
 }
 
 
 .btn-back {
   position: fixed;
-  top: 2%; /* Ajuste conforme necessário */
-  left: 1%; /* Ajuste conforme necessário */
-  z-index: 9999; /* Certifique-se de que o botão esteja acima de outros elementos */
-  font-size: 14px; /* Ajuste o tamanho da fonte */
-  padding: 8px 12px; /* Ajuste o preenchimento do botão */
-  width: auto; /* Defina a largura como automática para que o botão se ajuste ao conteúdo */
+  top: 2%; 
+  left: 1%; 
+  z-index: 9999; 
+  font-size: 14px; 
+  padding: 8px 12px; 
+  width: auto; 
 }
 
 .btn-perfil {
   position: fixed;
-  top: 2%; /* Ajuste conforme necessário */
-  left: 95%; /* Ajuste conforme necessário */
-  z-index: 9999; /* Certifique-se de que o botão esteja acima de outros elementos */
-  font-size: 14px; /* Ajuste o tamanho da fonte */
-  padding: 8px 12px; /* Ajuste o preenchimento do botão */
-  width: auto; /* Defina a largura como automática para que o botão se ajuste ao conteúdo */
+  top: 2%; 
+  left: 95%; 
+  z-index: 9999; 
+  font-size: 14px; 
+  padding: 8px 12px; 
+  width: auto; 
 }
 
 

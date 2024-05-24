@@ -55,25 +55,25 @@ html, body {
 }
 
 .team-selection {
-  max-width: 500px; /* Define a largura máxima do contêiner */
-  margin: 0 auto; /* Centraliza o contêiner horizontalmente */
-  text-align: center; /* Centraliza as imagens horizontalmente */
+  max-width: 500px; 
+  margin: 0 auto; 
+  text-align: center; 
 }
 
 .team-image {
-  width: 150px; /* Define a largura das imagens das equipes */
-  cursor: pointer; /* Altera o cursor para indicar que as imagens são clicáveis */
-  display: inline-block; /* Para manter as imagens lado a lado */
-  margin: 10px; /* Adiciona um espaçamento entre as imagens */
+  width: 150px; 
+  cursor: pointer; 
+  display: inline-block; 
+  margin: 10px; 
 }
 
 .team-image:hover {
-  animation: pulse 0.5s infinite alternate; /* Adiciona uma animação de pulso quando o mouse está sobre a imagem */
+  animation: pulse 0.5s infinite alternate; 
 }
 
 .escolhereq {
-  max-width: 100%; /* Define a largura máxima como 100% da largura do contêiner pai */
-  height: auto; /* Mantém a proporção da imagem */
+  max-width: 100%; 
+  height: auto; 
 }
 
 

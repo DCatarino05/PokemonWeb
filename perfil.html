@@ -20,7 +20,7 @@
         let myPokemon = [];
 
         const fetchMyPokemon = async () => {
-            const randomPokemonIds = _.sampleSize(_.range(1, 898), 21); // IDs aleatórios de Pokémon
+            const randomPokemonIds = _.sampleSize(_.range(1, 898), 21);
 
             const requests = randomPokemonIds.map(id => axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`));
             const responses = await Promise.all(requests);
@@ -48,7 +48,7 @@
         };
 
         const selectPokemon = (event, pokemonId) => {
-        // Limpar botões antigos
+        
         clearOldButtons();
 
         const pokemon = myPokemon.find(p => p.id === pokemonId);
@@ -61,7 +61,7 @@
         deleteButton.addEventListener('click', () => confirmDeletePokemon(pokemon));
     };
 
-    // Função para limpar os botões antigos
+    
     const clearOldButtons = () => {
         const oldButtons = document.querySelectorAll('.edit-button, .delete-button');
         oldButtons.forEach(button => button.style.display = 'none');
@@ -82,7 +82,7 @@
         };
 
         const deletePokemon = (pokemonId) => {
-            removeConfirmationMessage(); // Remover a mensagem de confirmação
+            removeConfirmationMessage(); 
             myPokemon = myPokemon.filter(p => p.id !== pokemonId);
             displayMyPokemon();
         };
@@ -92,15 +92,12 @@
         const editPokemonImage = document.getElementById('edit-pokemon-image');
         const editPokemonNameInput = document.getElementById('edit-pokemon-name');
 
-        // Definir a imagem do Pokémon
         editPokemonImage.src = pokemon.image;
         editPokemonImage.alt = pokemon.name;
 
-        // Mostrar o pop-up de edição
         editConfirmationMessage.style.display = 'block';
         editPokemonNameInput.value = pokemon.name;
 
-        // Confirmar a edição
         window.confirmEdit = () => {
             const newName = editPokemonNameInput.value;
             pokemon.name = newName;
@@ -108,7 +105,6 @@
             editConfirmationMessage.style.display = 'none'; // Esconder o pop-up de edição
         };
 
-        // Cancelar a edição
         window.cancelEdit = () => {
             editConfirmationMessage.style.display = 'none'; // Esconder o pop-up de edição
         };
@@ -118,7 +114,7 @@
 
 
         const cancelDelete = () => {
-            removeConfirmationMessage(); // Remover a mensagem de confirmação
+            removeConfirmationMessage(); 
         };
 
         const removeConfirmationMessage = () => {
@@ -132,7 +128,7 @@
 
         const buttonBack = document.querySelector('.btn-back');
       buttonBack.addEventListener('click', () => {
-        window.location.href = "pokedex.html"; // Substitua "outra_pagina.html" pelo caminho da outra página
+        window.location.href = "pokedex.html"; 
       });
     
     </script>

@@ -14,11 +14,9 @@
   <div id="video-background">
     <video autoplay loop muted class="video-background">
       <source src="images/fundoteste3.mp4" type="video/mp4">
-      <!-- Adicione mais formatos de vídeo aqui, se necessário -->
     </video>
   </div>
   <main>
-    <!-- Seu conteúdo aqui -->
     <div class="pokemon-info">
       <img src="#" alt="pokemon" class="pokemon__image">
       <h1 class="pokemon__data">
@@ -45,24 +43,21 @@
 
     <div class="pokemon-stats-container" style="display:none;">
       <div class="pokemon-stats">
-        <!-- Aqui serão exibidas as estatísticas -->
       </div>
     </div>
   </main>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      // Código JavaScript existente
 
-      // Evento de clique para o botão de voltar
       const buttonBack = document.querySelector('.btn-back');
       buttonBack.addEventListener('click', () => {
-        window.location.href = "index.html"; // Substitua "outra_pagina.html" pelo caminho da outra página
+        window.location.href = "index.html"; 
       });
     });
 
     const buttonPerfil = document.querySelector('.btn-perfil');
       buttonPerfil.addEventListener('click', () => {
-        window.location.href = "perfil.html"; // Substitua "perfil.html" pelo caminho da página de perfil
+        window.location.href = "perfil.html"; 
       });
 
     document.addEventListener("DOMContentLoaded", function() {
@@ -85,12 +80,10 @@
             pokedexImage.src = "./images/pokedex.png";
         }
 
-        // Agora que a equipe foi definida, renderize o Pokémon inicial
         renderPokemon(searchPokemon);
       }
     });
 
-    // Funções para renderizar os Pokémon
     const pokemonName = document.querySelector('.pokemon__name');
     const pokemonNumber = document.querySelector('.pokemon__number');
     const pokemonImage = document.querySelector('.pokemon__image');
@@ -169,7 +162,7 @@
   const statsList = document.querySelector('.pokemon-stats');
 
   if (stats.length > 0) {
-    statsList.innerHTML = ''; // Limpa a lista antes de adicionar as novas estatísticas
+    statsList.innerHTML = ''; 
 
     stats.forEach(stat => {
       const statElement = document.createElement('h2');
@@ -184,7 +177,6 @@
 
   buttonNext.addEventListener('click', () => {
   searchPokemon += 1;
-  // Oculta o contêiner de estatísticas ao avançar para o próximo Pokémon
   pokemonStatsContainer.style.display = 'none';
   renderPokemon(searchPokemon);
 });
@@ -192,7 +184,6 @@
 buttonPrev.addEventListener('click', () => {
   if (searchPokemon > 1) {
     searchPokemon -= 1;
-    // Oculta o contêiner de estatísticas ao retroceder para o Pokémon anterior
     pokemonStatsContainer.style.display = 'none';
     renderPokemon(searchPokemon);
   }

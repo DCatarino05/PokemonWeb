@@ -19,9 +19,9 @@ body {
     padding: 10px;
     border-radius: 5px;
     text-align: center;
-    cursor: pointer; /* Adicionado para indicar que os Pokémon são clicáveis */
-    position: relative; /* Adiciona posição relativa para que os botões possam ser posicionados relativamente a este elemento */
-    cursor: pointer; /* Adicionado para indicar que os Pokémon são clicáveis */
+    cursor: pointer; 
+    position: relative; 
+    cursor: pointer; 
 }
 
 .pokemon-image {
@@ -47,11 +47,11 @@ body {
     text-decoration: none;
     font-size: 16px;
     margin-right: 5px;
-    display: none; /* Inicialmente escondido */
-    width: 80px; /* Largura fixa */
-    background-color: #4CAF50; /* Verde para o botão de edição */
+    display: none; 
+    width: 80px; 
+    background-color: #4CAF50; 
     position: absolute;
-    bottom: -25px; /* Definir um valor negativo maior para mover os botões para baixo */
+    bottom: -25px; 
     text-align: center;
 }
 
@@ -65,11 +65,11 @@ body {
     text-decoration: none;
     font-size: 16px;
     margin-right: 105px;
-    background-color: #f44336; /* Vermelho para o botão de exclusão */
-    display: none; /* Inicialmente escondido */
-    width: 80px; /* Largura fixa */
+    background-color: #f44336; 
+    display: none; 
+    width: 80px; 
     position: absolute;
-    bottom: -25px; /* Definir um valor negativo maior para mover os botões para baixo */
+    bottom: -25px; 
     text-align: center;
 }
 
@@ -89,12 +89,12 @@ h1 {
     background-color: #fff;
     border-radius: 10px;
     padding: 20px;
-    z-index: 1001; /* Garante que a mensagem esteja acima de outros elementos */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Adiciona sombra à mensagem */
+    z-index: 1001; 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); 
 }
 
 .confirmation-message p {
-    margin: 0 0 10px; /* Margem inferior para separar os parágrafos */
+    margin: 0 0 10px; 
 }
 
 .confirmation-buttons {
@@ -112,11 +112,11 @@ h1 {
 }
 
 .confirmation-button.confirm {
-    background-color: #4CAF50; /* Verde para o botão de confirmação */
+    background-color: #4CAF50; 
 }
 
 .confirmation-button.cancel {
-    background-color: #f44336; /* Vermelho para o botão de cancelamento */
+    background-color: #f44336; 
 }
 .confirmation-message {
     position: fixed;
@@ -126,12 +126,12 @@ h1 {
     background-color: #fff;
     border-radius: 10px;
     padding: 20px;
-    z-index: 1001; /* Garante que a mensagem esteja acima de outros elementos */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Adiciona sombra à mensagem */
+    z-index: 1001; 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); 
 }
 
 .confirmation-message p {
-    margin: 0 0 10px; /* Margem inferior para separar os parágrafos */
+    margin: 0 0 10px; 
 }
 
 .confirmation-buttons {
@@ -149,11 +149,11 @@ h1 {
 }
 
 .confirmation-button.confirm {
-    background-color: #4CAF50; /* Verde para o botão de confirmação */
+    background-color: #4CAF50; 
 }
 
 .confirmation-button.cancel {
-    background-color: #f44336; /* Vermelho para o botão de cancelamento */
+    background-color: #f44336; 
 }
 
 
@@ -189,18 +189,18 @@ h1 {
 .edit-button,
 .delete-button {
     position: absolute;
-    bottom: -25px; /* Definir um valor negativo maior para mover os botões para baixo */
+    bottom: -25px; 
     display: none;
     width: 80px;
     text-align: center;
 }
 
 .edit-button {
-    left: 25px; /* Ajustar o valor para mover o botão mais para a direita */
+    left: 25px; 
 }
 
 .delete-button {
-    left: 110px; /* Ajustar o valor para mover o botão mais para a direita */
+    left: 110px; 
     
 }
 
@@ -278,11 +278,11 @@ h1 {
 }
 
 .confirm-button {
-    background-color: #4CAF50; /* Verde para o botão de confirmação */
+    background-color: #4CAF50; 
 }
 
 .cancel-button {
-    background-color: #f44336; /* Vermelho para o botão de cancelamento */
+    background-color: #f44336; 
 }
 
 .confirmarel{
@@ -291,11 +291,11 @@ h1 {
 
 .btn-back {
     position: fixed;
-    top: 4.5%; /* Ajuste conforme necessário */
-    left: 20px; /* Ajuste conforme necessário */
-    z-index: 9999; /* Certifique-se de que o botão esteja acima de outros elementos */
-    padding: 8px 12px; /* Ajuste o preenchimento do botão */
-    width: auto; /* Defina a largura como automática para que o botão se ajuste ao conteúdo */
+    top: 2%; 
+    left: 20px; 
+    z-index: 9999; 
+    padding: 8px 12px; 
+    width: auto; 
     border: 2px solid #000;
     border-radius: 5px;
     font-size: clamp(8px, 5vw, 1rem);
