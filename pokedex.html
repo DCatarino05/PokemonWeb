@@ -215,6 +215,53 @@ const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+let cachedStats = []; // Variável global para armazenar temporariamente as estatísticas
+
+buttonNext.addEventListener('click', async () => {
+  const currentIndex = currentTeamPokemonIds.indexOf(searchPokemon);
+  if (currentIndex < currentTeamPokemonIds.length - 1) {
+    searchPokemon = currentTeamPokemonIds[currentIndex + 1];
+    cachedStats = await fetchPokemonStats(searchPokemon); // Armazena temporariamente as estatísticas
+    renderPokemon(searchPokemon);
+    displayCachedStats(); // Exibe as estatísticas armazenadas temporariamente
+  }
+});
+
+buttonPrev.addEventListener('click', async () => {
+  const currentIndex = currentTeamPokemonIds.indexOf(searchPokemon);
+  if (currentIndex > 0) {
+    searchPokemon = currentTeamPokemonIds[currentIndex - 1];
+    cachedStats = await fetchPokemonStats(searchPokemon); // Armazena temporariamente as estatísticas
+    renderPokemon(searchPokemon);
+    displayCachedStats(); // Exibe as estatísticas armazenadas temporariamente
+  }
+});
+
+let statsVisible = false; // Inicialmente, as estatísticas estão ocultas
+
+buttonStats.addEventListener('click', async () => {
+  if (!statsVisible) {
+    const stats = await fetchPokemonStats(searchPokemon);
+    displayPokemonStats(stats);
+    statsVisible = true; // Agora as estatísticas estão visíveis
+  } else {
+    pokemonStatsContainer.style.display = 'none'; // Oculta as estatísticas
+    statsVisible = false; // Agora as estatísticas estão ocultas novamente
+  }
+});
+
+
+
+
+
+
+const displayCachedStats = () => {
+  if (cachedStats.length > 0) {
+    displayPokemonStats(cachedStats);
+  }
+};
+
+
 
 // Função para obter a cor da barra com base na estatística
 const getColorForStat = (statName) => {
