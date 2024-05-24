@@ -9,9 +9,15 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> 
 </head>
 <body>
+    <div id="video-background">
+        <video autoplay loop muted class="video-background">
+          <source src="images/fundopokemons.mp4" type="video/mp4">
+        </video>
+      </div>
+
     <button class="button btn-back">Voltar</button>
     <button class="button btn-pokedex">Pokédex</button>
-    <h1>Meus Pokémon</h1>
+    <img class="escolhereq" src="./images/meuspokemons.png" alt="Meus Pokemons">
     <div class="container" id="pokemon-container"></div>
     
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
