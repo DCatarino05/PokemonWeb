@@ -180,34 +180,40 @@
     const displayPokemonStats = (stats) => {
   statsList.innerHTML = '';
 
-  if (stats.length > 0) {
-    stats.forEach(stat => {
+  const orderedStats = ['hp', 'attack', 'defense', 'special-attack', 'special-defense', 'speed'];
+
+  orderedStats.forEach(statName => {
+    const stat = stats.find(s => s.stat.name === statName);
+    if (stat) {
       const statElement = document.createElement('div');
       statElement.classList.add('stat-bar');
 
-      const statName = document.createElement('div');
-      statName.classList.add('stat-name');
-      statName.textContent = stat.stat.name;
+      const statNameDiv = document.createElement('div');
+      statNameDiv.textContent = statName === 'special-attack' ? 'Special Attack' : capitalizeFirstLetter(statName);
+      statNameDiv.classList.add('stat-name');
 
       const statValue = document.createElement('div');
       statValue.classList.add('stat-value');
       const statValueSpan = document.createElement('span');
-      statValueSpan.style.width = `${stat.base_stat * 3}px`; // Definindo a largura da barra baseada no valor da estatística
-      statValueSpan.style.backgroundColor = getColorForStat(stat.stat.name); // Obtendo a cor para a estatística
-      statValueSpan.textContent = stat.base_stat; // Exibindo o valor numérico sobre a barra
+      statValueSpan.style.width = `${stat.base_stat * 2}px`;
+      statValueSpan.dataset.stat = statName;
+      statValueSpan.textContent = stat.base_stat;
       statValue.appendChild(statValueSpan);
 
-      statElement.appendChild(statName);
+      statElement.appendChild(statNameDiv);
       statElement.appendChild(statValue);
 
       statsList.appendChild(statElement);
-    });
+    }
+  });
 
-    pokemonStatsContainer.style.display = 'flex';
-  } else {
-    pokemonStatsContainer.style.display = 'none';
-  }
+  pokemonStatsContainer.style.display = stats.length > 0 ? 'flex' : 'none';
 }
+
+const capitalizeFirstLetter = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 
 // Função para obter a cor da barra com base na estatística
 const getColorForStat = (statName) => {

@@ -125,18 +125,17 @@ main {
   max-width: 200px;
   margin: 0 auto;
   margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
   color: white;
 }
 
-.pokemon-stats h2 {
-  margin-right: 5%;
+.stat-bar {
+  margin-bottom: 10px; /* Adiciona espaçamento vertical entre as barras */
 }
+
 
 .estatisticas {
   position: absolute;
-  top: 30%;
+  top: 25%;
   left: 160%;
   transform: translateX(-50%);
 }
@@ -164,27 +163,60 @@ main {
 .stat-bar {
   display: flex;
   align-items: center;
-  margin-bottom: 10px; /* Adicionando um espaço de 10px entre as barras */
+  margin-bottom: 15px; /* Espaço entre as barras */
 }
 
 .stat-name {
-  width: 60px;
+  width: 100px;
   text-align: right;
-  margin-right: 10px;
+  margin-right: 15px;
+  font-weight: bold;
+  color: #ffffff;
 }
 
 .stat-value {
-  height: 20px;
-  background-color: grey;
+  position: relative;
+  flex-grow: 1;
+  height: 25px;
+  background-color: #e0e0e0;
   border-radius: 5px;
   overflow: hidden;
-  flex-grow: 1;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .stat-value span {
   display: block;
   height: 100%;
+  border-radius: 5px;
+  background-color: #888; /* Default color if no match */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: width 0.3s ease-in-out;
 }
+
+.stat-value span[data-stat="hp"] {
+  background-color: #4caf50; /* Green for HP */
+}
+
+.stat-value span[data-stat="attack"] {
+  background-color: #f44336; /* Red for Attack */
+}
+
+.stat-value span[data-stat="defense"] {
+  background-color: #2196f3; /* Blue for Defense */
+}
+
+.stat-value span[data-stat="special-attack"] {
+  background-color: #ff9800; /* Orange for Special Attack */
+}
+
+.stat-value span[data-stat="special-defense"] {
+  background-color: #9c27b0; /* Purple for Special Defense */
+}
+
+.stat-value span[data-stat="speed"] {
+  background-color: #ffeb3b; /* Yellow for Speed */
+}
+
 
 
 
