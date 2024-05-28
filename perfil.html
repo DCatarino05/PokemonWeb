@@ -6,17 +6,15 @@
     <title>Meus Pokémon</title>
     <link rel="stylesheet" href="perfil.css" />
     <link rel="icon" href="/favicons/favicon-16x16.png" type="image/png">
-
     <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> 
 </head>
 <body>
     <div id="video-background">
         <video autoplay loop muted class="video-background">
-          <source src="images/fundopokemons.mp4" type="video/mp4">
+            <source src="images/fundopokemons.mp4" type="video/mp4">
         </video>
-      </div>
-
+    </div>
     <button class="button btn-back">Voltar</button>
     <button class="button btn-pokedex">Pokédex</button>
     <img class="escolhereq" src="./images/meuspokemons.png" alt="Meus Pokemons">
@@ -27,10 +25,12 @@
 
     <div class="edit-confirmation-message">
         <img class="pokemon-image" id="edit-pokemon-image" />
-        <p>Digite o novo nome para o Pokémon:</p>   
+        <p class="confirmarel">Digite o novo nome para o Pokémon:</p>   
         <input type="text" id="edit-pokemon-name" />
-        <button class="confirm-button" onclick="confirmEdit()">Confirmar</button>
-        <button class="cancel-button" onclick="cancelEdit()">Cancelar</button>
+        <div class="edit-buttons">
+            <button class="confirm-button" onclick="confirmEdit()">Confirmar</button>
+            <button class="cancel-button" onclick="cancelEdit()">Cancelar</button>
+        </div>
     </div>
 </body>
 </html>

@@ -41,9 +41,13 @@ body {
     padding: 10px;
     border-radius: 5px;
     text-align: center;
-    cursor: pointer; 
-    position: relative; 
-    cursor: pointer; 
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pokemon-item:hover {
+    transform: translateY(-10px) scale(1.05);
 }
 
 .pokemon-image {
@@ -51,14 +55,26 @@ body {
     height: 100px;
     margin: 0 auto;
     display: block;
+    transition: transform 0.3s ease;
+}
+
+.pokemon-item:hover .pokemon-image {
+    transform: rotate(10deg);
 }
 
 .pokemon-name {
     margin-top: 5px;
     font-size: 16px;
     text-align: center;
-    color: #000;
+    color: #000; /* Preto */
+    transition: color 0.3s ease;
 }
+
+.pokemon-item:hover .pokemon-name {
+    color: #000; /* Preto */
+}
+
+
 
 .edit-button{
     cursor: pointer;
@@ -224,19 +240,30 @@ h1 {
     display: none;
     width: 80px;
     text-align: center;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s;
+}
+.edit-button:hover,
+.delete-button:hover {
+    transform: scale(1.05);
 }
 
 .edit-button {
     left: 25px; 
+    background-color: #4CAF50; 
+    color: white;
 }
 
 .delete-button {
     left: 110px; 
-    
+    background-color: #f44336; 
+    color: white;
 }
-
-
-
 
 #pokedex {
     display: grid;
@@ -286,6 +313,17 @@ h1 {
     z-index: 1001;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
+
+.edit-confirmation-message input[type="text"] {
+    width: calc(100% - 20px);
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 16px;
+}
+
 
 .edit-confirmation-message p {
     margin: 0 0 10px;

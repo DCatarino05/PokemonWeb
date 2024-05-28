@@ -70,7 +70,10 @@ const selectPokemon = (event, pokemonId) => {
     deleteButton.style.display = 'inline-block';
     // Adiciona event listeners aos botões de edição e exclusão
     editButton.addEventListener('click', () => editPokemon(pokemon));
-    deleteButton.addEventListener('click', () => confirmDeletePokemon(pokemon));
+    deleteButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        confirmDeletePokemon(pokemon);
+    });
 };
 
 // Função para esconder os botões de edição e exclusão antigos
@@ -81,6 +84,8 @@ const clearOldButtons = () => {
 
 // Função para exibir a mensagem de confirmação de exclusão
 const confirmDeletePokemon = (pokemon) => {
+    removeConfirmationMessage(); // Remove qualquer mensagem de confirmação existente
+
     const confirmationMessage = `
         <div class="confirmation-message">
             <img class="pokemon-image" src="${pokemon.image}" alt="${pokemon.name}" />
