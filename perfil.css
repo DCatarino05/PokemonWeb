@@ -1,11 +1,11 @@
+/* Define a cor do texto, margens e a fonte da página */
 body {
-    
     color: white;
     margin: 0;
     font-family: rubik;
 }
 
-
+/* Define as propriedades para o vídeo de fundo */
 #video-background {
     position: fixed;
     top: 0;
@@ -14,9 +14,10 @@ body {
     height: 100%;
     z-index: -1;
     overflow: hidden;
-  }
-  
-  .video-background {
+}
+
+/* Ajusta o vídeo de fundo para cobrir a tela */
+.video-background {
     min-width: 100%;
     min-height: 100%;
     width: auto;
@@ -25,8 +26,9 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
+}
 
+/* Define a área do contêiner para os Pokémon */
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -35,6 +37,7 @@ body {
     margin: 0 auto;
 }
 
+/* Define as propriedades de estilo para cada item Pokémon */
 .pokemon-item {
     flex-basis: 200px;
     margin: 10px;
@@ -50,6 +53,7 @@ body {
     transform: translateY(-10px) scale(1.05);
 }
 
+/* Define o tamanho das imagens dos Pokémon */
 .pokemon-image {
     width: 100px;
     height: 100px;
@@ -62,6 +66,7 @@ body {
     transform: rotate(10deg);
 }
 
+/* Define o estilo do nome dos Pokémon */
 .pokemon-name {
     margin-top: 5px;
     font-size: 16px;
@@ -74,8 +79,6 @@ body {
     color: #000; /* Preto */
 }
 
-
-
 .edit-button{
     cursor: pointer;
     color: white;
@@ -85,33 +88,24 @@ body {
     text-align: center;
     text-decoration: none;
     font-size: 16px;
-    margin-right: 5px;
     display: none; 
     width: 80px; 
-    background-color: #4CAF50; 
     position: absolute;
     bottom: -25px; 
     text-align: center;
+}
+
+.edit-button {
+    background-color: #4CAF50; 
+    left: 25px; 
 }
 
 .delete-button {
-    cursor: pointer;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 12px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-    margin-right: 105px;
     background-color: #f44336; 
-    display: none; 
-    width: 80px; 
-    position: absolute;
-    bottom: -25px; 
-    text-align: center;
+    left: 110px; 
 }
 
+/* Define o estilo da imagem principal */
 .escolhereq {
     max-width: 100%; 
     height: auto; 
@@ -121,50 +115,14 @@ body {
     margin-top: 10px;
 }
 
-
+/* Define o estilo para o título da página */
 h1 {
     text-transform: uppercase;
     text-align: center;
     font-size: 54px;
 }
 
-.confirmation-message {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    z-index: 1001; 
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); 
-}
-
-.confirmation-message p {
-    margin: 0 0 10px; 
-}
-
-.confirmation-buttons {
-    text-align: center;
-}
-
-.confirmation-button {
-    cursor: pointer;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    margin: 0 10px;
-}
-
-.confirmation-button.confirm {
-    background-color: #4CAF50; 
-}
-
-.confirmation-button.cancel {
-    background-color: #f44336; 
-}
+/* Define o estilo para a mensagem de confirmação */
 .confirmation-message {
     position: fixed;
     top: 50%;
@@ -354,30 +312,14 @@ h1 {
     background-color: #f44336; 
 }
 
-.confirmarel{
+.confirmarel {
     color: black;
 }
 
-.btn-back {
+/* Define o estilo para os botões de voltar e pokédex */
+.btn-back, .btn-pokedex {
     position: fixed;
     top: 2%; 
-    left: 20px; 
-    z-index: 9999; 
-    padding: 8px 12px; 
-    width: auto; 
-    border: 2px solid #000;
-    border-radius: 5px;
-    font-size: clamp(8px, 5vw, 1rem);
-    font-weight: 600;
-    color: white;
-    background-color: #444;
-    box-shadow: -2px 3px 0 #222, -4px 6px 0 #000;
-  }
-
-.btn-pokedex {
-    position: fixed;
-    top: 2%; 
-    left: 93%; 
     z-index: 9999; 
     padding: 8px 12px; 
     width: auto; 
@@ -389,16 +331,21 @@ h1 {
     background-color: #444;
     box-shadow: -2px 3px 0 #222, -4px 6px 0 #000;
 }
-  
-  
-  .button:active {
+
+.btn-back {
+    left: 20px; 
+}
+
+.btn-pokedex {
+    right: 20px; 
+}
+
+.button:active {
     box-shadow: inset -4px 4px 0 #222;
     font-size: 0.9rem;
-  }
+}
 
- 
-
-
+/* Define a animação de bounce */
 @keyframes bounce {
     20% {
         transform: translateY(-6px);
@@ -412,5 +359,58 @@ h1 {
     }
     100% {
         transform: translateY(0);
+    }
+}
+
+/* Media queries para tornar o layout responsivo */
+@media (max-width: 800px) {
+    .escolhereq {
+        width: 80%; /* Reduz a largura da imagem para 80% da largura da tela */
+    }
+}
+
+@media (max-width: 600px) {
+    .pokemon-item {
+        flex-basis: calc(100% - 20px);
+    }
+
+    .edit-button, .delete-button {
+        width: 100%;
+        left: 0;
+        margin-top: 5px;
+        bottom: -35px;
+    }
+
+    .btn-back, .btn-pokedex {
+        font-size: 12px;
+    }
+
+    .escolhereq {
+        width: 50%; /* Reduz a largura da imagem para 70% da largura da tela */
+    }
+}
+
+@media (max-width: 400px) {
+    .btn-back, .btn-pokedex {
+        font-size: 10px;
+        padding: 6px 8px;
+    }
+
+    .pokemon-item {
+        margin: 5px;
+        padding: 5px;
+    }
+
+    .pokemon-image {
+        width: 80px;
+        height: 80px;
+    }
+
+    .pokemon-name {
+        font-size: 14px;
+    }
+
+    .escolhereq {
+        width: 40%; /* Reduz a largura da imagem para 60% da largura da tela */
     }
 }
