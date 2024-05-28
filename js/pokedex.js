@@ -1,24 +1,22 @@
 const teamPokemons = {
-  valor: [4,5,6,45,46,47,98,99,100,101,118,119,124,126,129,136,146,218,219,224,225 ], 
-instinct: [ 14,15,18,172,25,26,27,28,38,54,63,64,65,69,70,71,77,78,96,97,125], 
-mystic: [7, 8, 9,29,30,31,55,60,61,62,66,67,68,72,147,148,144,501,502,503,393]
+  valor: [4, 5, 6, 45, 46, 47, 98, 99, 100, 101, 118, 119, 124, 126, 129, 136, 146, 218, 219, 224, 225],
+  instinct: [14, 15, 18, 172, 25, 26, 27, 28, 38, 54, 63, 64, 65, 69, 70, 71, 77, 78, 96, 97, 125],
+  mystic: [7, 8, 9, 29, 30, 31, 55, 60, 61, 62, 66, 67, 68, 72, 147, 148, 144, 501, 502, 503, 393]
 };
 
 let searchPokemon = 0;
 let currentTeamPokemonIds = [];
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const buttonBack = document.querySelector('.btn-back');
   buttonBack.addEventListener('click', () => {
-    window.location.href = "perfil.html"; 
+    window.location.href = "perfil.html";
   });
-  
 
   const buttonPerfil = document.querySelector('.btn-perfil');
   buttonPerfil.addEventListener('click', () => {
     window.location.href = "perfil.html";
   });
-  
 
   const pokedexImage = document.querySelector('.pokedex');
   const pokemonTeam = localStorage.getItem('pokemonTeam');
@@ -41,13 +39,13 @@ document.addEventListener("DOMContentLoaded", () => {
         pokedexImage.src = "./images/pokedex.png";
     }
 
-    renderPokemon(searchPokemon);
+    await renderPokemon(searchPokemon);
+    await fetchAndDisplayStats(searchPokemon); // Fetch and display stats for the first Pokémon
   } else {
     alert('Nenhuma equipe selecionada!');
     window.location.href = 'escolha-de-time.html';
   }
 });
-
 
 const pokemonName = document.querySelector('.pokemon__name');
 const pokemonNumber = document.querySelector('.pokemon__number');
@@ -67,7 +65,7 @@ const fetchPokemon = async (pokemonId) => {
     const data = await APIResponse.json();
     return data;
   }
-}
+};
 
 const fetchPokemonStats = async (pokemonId) => {
   const data = await fetchPokemon(pokemonId);
@@ -78,7 +76,7 @@ const fetchPokemonStats = async (pokemonId) => {
     console.error('Erro ao buscar estatísticas do Pokémon');
     return [];
   }
-}
+};
 
 const renderPokemon = async (pokemonId) => {
   pokemonName.innerHTML = 'Loading...';
@@ -98,7 +96,12 @@ const renderPokemon = async (pokemonId) => {
     pokemonName.innerHTML = 'Not found :c';
     pokemonNumber.innerHTML = '';
   }
-}
+};
+
+const fetchAndDisplayStats = async (pokemonId) => {
+  const stats = await fetchPokemonStats(pokemonId);
+  displayPokemonStats(stats);
+};
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -107,135 +110,106 @@ form.addEventListener('submit', (event) => {
 
   if (foundPokemon) {
     renderPokemon(foundPokemon);
+    fetchAndDisplayStats(foundPokemon); // Fetch and display stats for the searched Pokémon
   } else {
     pokemonName.innerHTML = 'Not found :c';
     pokemonNumber.innerHTML = '';
     pokemonImage.style.display = 'none';
+    pokemonStatsContainer.style.display = 'none'; // Hide stats container
   }
-});
-
-buttonPrev.addEventListener('click', () => {
-  const currentIndex = currentTeamPokemonIds.indexOf(searchPokemon);
-  if (currentIndex > 0) {
-    searchPokemon = currentTeamPokemonIds[currentIndex - 1];
-    renderPokemon(searchPokemon);
-  }
-});
-
-buttonNext.addEventListener('click', () => {
-  const currentIndex = currentTeamPokemonIds.indexOf(searchPokemon);
-  if (currentIndex < currentTeamPokemonIds.length - 1) {
-    searchPokemon = currentTeamPokemonIds[currentIndex + 1];
-    renderPokemon(searchPokemon);
-  }
-});
-
-buttonStats.addEventListener('click', async () => {
-  const stats = await fetchPokemonStats(searchPokemon);
-  displayPokemonStats(stats);
-});
-
-const displayPokemonStats = (stats) => {
-statsList.innerHTML = '';
-
-const orderedStats = ['hp', 'attack', 'defense', 'special-attack', 'special-defense', 'speed'];
-
-orderedStats.forEach(statName => {
-const stat = stats.find(s => s.stat.name === statName);
-if (stat) {
-  const statElement = document.createElement('div');
-  statElement.classList.add('stat-bar');
-
-  const statNameDiv = document.createElement('div');
-  statNameDiv.textContent = statName === 'special-attack' ? 'Special Attack' : capitalizeFirstLetter(statName);
-  statNameDiv.classList.add('stat-name');
-
-  const statValue = document.createElement('div');
-  statValue.classList.add('stat-value');
-  const statValueSpan = document.createElement('span');
-  statValueSpan.style.width = `${stat.base_stat * 2}px`;
-  statValueSpan.dataset.stat = statName;
-  statValueSpan.textContent = stat.base_stat;
-  statValue.appendChild(statValueSpan);
-
-  statElement.appendChild(statNameDiv);
-  statElement.appendChild(statValue);
-
-  statsList.appendChild(statElement);
-}
-});
-
-pokemonStatsContainer.style.display = stats.length > 0 ? 'flex' : 'none';
-}
-
-const capitalizeFirstLetter = (string) => {
-return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-let cachedStats = []; // Variável global para armazenar temporariamente as estatísticas
-
-buttonNext.addEventListener('click', async () => {
-const currentIndex = currentTeamPokemonIds.indexOf(searchPokemon);
-if (currentIndex < currentTeamPokemonIds.length - 1) {
-searchPokemon = currentTeamPokemonIds[currentIndex + 1];
-cachedStats = await fetchPokemonStats(searchPokemon); // Armazena temporariamente as estatísticas
-renderPokemon(searchPokemon);
-displayCachedStats(); // Exibe as estatísticas armazenadas temporariamente
-}
 });
 
 buttonPrev.addEventListener('click', async () => {
-const currentIndex = currentTeamPokemonIds.indexOf(searchPokemon);
-if (currentIndex > 0) {
-searchPokemon = currentTeamPokemonIds[currentIndex - 1];
-cachedStats = await fetchPokemonStats(searchPokemon); // Armazena temporariamente as estatísticas
-renderPokemon(searchPokemon);
-displayCachedStats(); // Exibe as estatísticas armazenadas temporariamente
-}
+  const currentIndex = currentTeamPokemonIds.indexOf(searchPokemon);
+  if (currentIndex > 0) {
+    searchPokemon = currentTeamPokemonIds[currentIndex - 1];
+    await renderPokemon(searchPokemon);
+    fetchAndDisplayStats(searchPokemon); // Fetch and display stats for the previous Pokémon
+  }
 });
 
-let statsVisible = false; // Inicialmente, as estatísticas estão ocultas
+buttonNext.addEventListener('click', async () => {
+  const currentIndex = currentTeamPokemonIds.indexOf(searchPokemon);
+  if (currentIndex < currentTeamPokemonIds.length - 1) {
+    searchPokemon = currentTeamPokemonIds[currentIndex + 1];
+    await renderPokemon(searchPokemon);
+    fetchAndDisplayStats(searchPokemon); // Fetch and display stats for the next Pokémon
+  }
+});
 
 buttonStats.addEventListener('click', async () => {
-if (!statsVisible) {
-const stats = await fetchPokemonStats(searchPokemon);
-displayPokemonStats(stats);
-statsVisible = true; // Agora as estatísticas estão visíveis
-} else {
-pokemonStatsContainer.style.display = 'none'; // Oculta as estatísticas
-statsVisible = false; // Agora as estatísticas estão ocultas novamente
-}
+  if (!statsVisible) {
+    const stats = await fetchPokemonStats(searchPokemon);
+    displayPokemonStats(stats);
+    statsVisible = true; // Now stats are visible
+  } else {
+    pokemonStatsContainer.style.display = 'none'; // Hide stats
+    statsVisible = false; // Now stats are hidden
+  }
 });
 
+const displayPokemonStats = (stats) => {
+  statsList.innerHTML = '';
 
+  const orderedStats = ['hp', 'attack', 'defense', 'special-attack', 'special-defense', 'speed'];
 
+  orderedStats.forEach(statName => {
+    const stat = stats.find(s => s.stat.name === statName);
+    if (stat) {
+      const statElement = document.createElement('div');
+      statElement.classList.add('stat-bar');
 
+      const statNameDiv = document.createElement('div');
+      statNameDiv.textContent = statName === 'special-attack' ? 'Special Attack' : capitalizeFirstLetter(statName);
+      statNameDiv.classList.add('stat-name');
 
+      const statValue = document.createElement('div');
+      statValue.classList.add('stat-value');
+      const statValueSpan = document.createElement('span');
+      statValueSpan.style.width = `${stat.base_stat * 2}px`;
+      statValueSpan.dataset.stat = statName;
+      statValueSpan.textContent = stat.base_stat;
+      statValue.appendChild(statValueSpan);
 
-const displayCachedStats = () => {
-if (cachedStats.length > 0) {
-displayPokemonStats(cachedStats);
-}
+      statElement.appendChild(statNameDiv);
+      statElement.appendChild(statValue);
+
+      statsList.appendChild(statElement);
+    }
+  });
+
+  pokemonStatsContainer.style.display = stats.length > 0 ? 'flex' : 'none';
 };
 
+const capitalizeFirstLetter = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
 
+let cachedStats = []; // Variável global para armazenar temporariamente as estatísticas
+let statsVisible = false; // Inicialmente, as estatísticas estão ocultas
+
+const displayCachedStats = () => {
+  if (cachedStats.length > 0) {
+    displayPokemonStats(cachedStats);
+  }
+};
 
 // Função para obter a cor da barra com base na estatística
 const getColorForStat = (statName) => {
-switch (statName) {
-case 'hp':
-  return 'green'; // Verde para HP
-case 'attack':
-  return 'red'; // Vermelho para Ataque
-case 'defense':
-  return 'blue'; // Azul para Defesa
-case 'special-attack':
-  return 'orange'; // Laranja para Ataque Especial
-case 'special-defense':
-  return 'purple'; // Roxo para Defesa Especial
-case 'speed':
-  return 'yellow'; // Amarelo para Velocidade
-default:
-  return 'gray'; // Cinza para outras estatísticas
-}
-}
+  switch (statName) {
+    case 'hp':
+      return 'green'; // Verde para HP
+    case 'attack':
+      return 'red'; // Vermelho para Ataque
+    case 'defense':
+      return 'blue'; // Azul para Defesa
+    case 'special-attack':
+      return 'orange'; // Laranja para Ataque Especial
+    case 'special-defense':
+      return 'purple'; // Roxo para Defesa Especial
+    case 'speed':
+      return 'yellow'; // Amarelo para Velocidade
+    default:
+      return 'gray'; // Cinza para outras estatísticas
+  }
+};
