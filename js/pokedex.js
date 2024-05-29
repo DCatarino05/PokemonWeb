@@ -67,6 +67,19 @@ const fetchPokemon = async (pokemonId) => {
   }
 };
 
+const fetchPokemonDescription = async (pokemonId) => {
+  const APIResponse = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`);
+  
+  if (APIResponse.status === 200) {
+    const data = await APIResponse.json();
+    const descriptionEntry = data.flavor_text_entries.find(entry => entry.language.name === 'en');
+    return descriptionEntry ? descriptionEntry.flavor_text : 'Description not available';
+  } else {
+    console.error('Error fetching Pokémon description');
+    return 'Description not available';
+  }
+};
+
 const fetchPokemonStats = async (pokemonId) => {
   const data = await fetchPokemon(pokemonId);
 
@@ -91,10 +104,18 @@ const renderPokemon = async (pokemonId) => {
     pokemonImage.src = data.sprites.front_default;
     input.value = '';
     searchPokemon = data.id;
+
+    // Fetch and display the Pokémon description
+    const description = await fetchPokemonDescription(pokemonId);
+    const pokemonDescriptionElement = document.querySelector('.pokemon-description');
+    pokemonDescriptionElement.innerHTML = description;
+
   } else {
     pokemonImage.style.display = 'none';
     pokemonName.innerHTML = 'Not found :c';
     pokemonNumber.innerHTML = '';
+    const pokemonDescriptionElement = document.querySelector('.pokemon-description');
+    pokemonDescriptionElement.innerHTML = 'Description not available';
   }
 };
 
@@ -103,19 +124,21 @@ const fetchAndDisplayStats = async (pokemonId) => {
   displayPokemonStats(stats);
 };
 
-form.addEventListener('submit', (event) => {
+form.addEventListener('submit', async (event) => {
   event.preventDefault();
   const inputValue = input.value.toLowerCase();
   const foundPokemon = currentTeamPokemonIds.find(id => id == inputValue || id == inputValue);
 
   if (foundPokemon) {
-    renderPokemon(foundPokemon);
+    await renderPokemon(foundPokemon);
     fetchAndDisplayStats(foundPokemon); // Fetch and display stats for the searched Pokémon
   } else {
     pokemonName.innerHTML = 'Not found :c';
     pokemonNumber.innerHTML = '';
     pokemonImage.style.display = 'none';
     pokemonStatsContainer.style.display = 'none'; // Hide stats container
+    const pokemonDescriptionElement = document.querySelector('.pokemon-description');
+    pokemonDescriptionElement.innerHTML = 'Description not available';
   }
 });
 
@@ -193,6 +216,7 @@ const displayCachedStats = () => {
     displayPokemonStats(cachedStats);
   }
 };
+
 
 // Função para obter a cor da barra com base na estatística
 const getColorForStat = (statName) => {
